@@ -14,7 +14,7 @@ namespace ami
 		void setup(float pointDistance);
 
 		void addRound(Operation::Operations op);
-		void addOperation(Operation::Type type);
+		void addOperation(Operation::Type type, unsigned int round, unsigned int roundIndex, unsigned int roundSize);
 		
 		void draw();
 	private:

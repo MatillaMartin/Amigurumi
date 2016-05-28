@@ -33,7 +33,7 @@ namespace ami
 					for (unsigned int operationIndex = 0; operationIndex < data.getNumTags(tagOperation); operationIndex++)
 					{
 						string operation = data.getValue(tagOperation, string(""), operationIndex);
-						unsigned int count = data.getAttribute(tagOperation, attCount, 0);
+						unsigned int count = data.getAttribute(tagOperation, attCount, 0, operationIndex);
 						if (operation != "")
 						{
 							// get operation as type

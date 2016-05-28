@@ -36,7 +36,11 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+	if (key == ' ')
+	{
+		patterns = PatternDigest::digest("pattern.xml");
+		view.setPattern(&patterns[0]);
+	}
 }
 
 //--------------------------------------------------------------
