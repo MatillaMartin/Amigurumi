@@ -14,6 +14,11 @@ namespace ami
 		m_mesh.draw();
 	}
 
+	void PatternView::update(float deltaTime)
+	{
+		m_mesh.update(deltaTime);
+	}
+
 	void PatternView::setPattern(PatternDef * pattern)
 	{
 		m_pattern = pattern;

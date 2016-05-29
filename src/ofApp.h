@@ -24,6 +24,9 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
+	string helpInfo;
+
+	string filepath;
 	ofEasyCam cam;
 	PatternView view;
 	vector<PatternDef> patterns;

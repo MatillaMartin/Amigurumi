@@ -14,6 +14,8 @@ namespace ami
 
 		void render();
 
+		void update(float deltaTime);
+
 		PatternDef * m_pattern;
 
 		PatternMesh m_mesh;

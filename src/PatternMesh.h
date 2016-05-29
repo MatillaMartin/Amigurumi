@@ -4,6 +4,8 @@
 
 #include "PatternDef.h"
 
+#include <set>
+
 namespace ami
 {
 	class PatternMesh
@@ -13,16 +15,25 @@ namespace ami
 
 		void setup(float pointDistance);
 
+		void update(float deltaTime);
+
 		void addRound(Operation::Operations op);
 		void addOperation(Operation::Type type, unsigned int round, unsigned int roundIndex, unsigned int roundSize);
-		
+
 		void draw();
 	private:
 
+		void addTriangle(ofIndexType tri0, ofIndexType tri1, ofIndexType tri2);
+		void computeTension();
+		void updateNormals();
+
 		ofMesh m_mesh;
+		
 		ofIndexType m_behind;
 		ofIndexType m_lastUnder;
-		ofIndexType m_current;
+
+		std::map <ofIndexType, ofVec3f> m_tension, m_idealTension, m_expansionTension;
+		std::map <ofIndexType, std::set<ofIndexType>> m_con;
 
 		unsigned int m_roundNum;
 		float m_pointDistance;

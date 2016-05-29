@@ -8,18 +8,29 @@ void ofApp::setup(){
 	ofEnableDepthTest();
 	ofDisableArbTex();
 
-	// configure cam
-	cam.setDistance(20);
-	cam.setNearClip(0.01f);
-	cam.setFarClip(100.0f);
+	ofSetFrameRate(60.0f);
 
-	patterns = PatternDigest::digest("pattern.xml");
+	// configure cam
+	cam.setDistance(30);
+	cam.setNearClip(0.01f);
+	cam.setFarClip(10000.0f);
+
+	filepath = "pattern.xml";
+
+	patterns = PatternDigest::digest(filepath);
 	view.setPattern(&patterns[0]);
+
+	helpInfo =
+		string("Left click to move camera \n") +
+		"Right click to zoom \n" +
+		"Space to reset \n" +
+		"L to load new pattern \n"
+		;
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+	view.update(ofGetLastFrameTime()*10.0f);
 }
 
 //--------------------------------------------------------------
@@ -27,19 +38,28 @@ void ofApp::draw(){
 	ofClear(0);
 	cam.begin();
 		ofDrawAxis(10);
-		ofPushStyle();
-			ofSetColor(255);
-			view.render();
-		ofPopStyle();
+		view.render();
 	cam.end();
+
+	ofDrawBitmapStringHighlight(helpInfo, ofVec3f(50, 50, 0));
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	if (key == ' ')
 	{
-		patterns = PatternDigest::digest("pattern.xml");
+		patterns = PatternDigest::digest(filepath);
 		view.setPattern(&patterns[0]);
+	}
+	if (key == 'l' || key == 'L')
+	{
+		auto res = ofSystemLoadDialog("Load pattern", false, "data");
+		if (res.bSuccess)
+		{
+			filepath = res.filePath;
+			patterns = PatternDigest::digest(filepath);
+			view.setPattern(&patterns[0]);
+		}
 	}
 }
 
