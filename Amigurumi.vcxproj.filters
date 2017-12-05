@@ -7,53 +7,53 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxBaseGui.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxBaseGui.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxButton.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxButton.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxGuiGroup.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxLabel.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxLabel.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxPanel.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxPanel.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxSlider.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSlider.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxToggle.cpp">
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
       <Filter>addons\ofxXmlSettings\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp">
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp">
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp">
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp">
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClCompile>
     <ClCompile Include="src\Pattern.cpp">
-      <Filter>src\Model</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\PatternDigest.cpp">
-      <Filter>src\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="src\PatternView.cpp">
-      <Filter>src\View</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\PatternMesh.cpp">
-      <Filter>src\View</Filter>
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PatternView.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,81 +61,75 @@
       <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons">
-      <UniqueIdentifier>{934bc08f-ce4c-4e86-8160-a20cbba4cc5e}</UniqueIdentifier>
+      <UniqueIdentifier>{2439ff30-4b0e-4db3-8e06-43b5b5c000b5}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxGui">
-      <UniqueIdentifier>{e32fccc2-dfd1-4caa-857e-94b128c40a8c}</UniqueIdentifier>
+      <UniqueIdentifier>{7b49b932-c936-464a-9c80-4b574abc4565}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxGui\src">
-      <UniqueIdentifier>{8f9bf004-d37c-4ba7-b5a6-8fd4ca5be590}</UniqueIdentifier>
+      <UniqueIdentifier>{2c53e92d-fdb5-447d-b4e9-ef2265baab08}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxXmlSettings">
-      <UniqueIdentifier>{b38d8dda-2257-4693-aee2-104a4710d244}</UniqueIdentifier>
+      <UniqueIdentifier>{0e8e6388-0ee0-477b-bb93-44fedc13b26f}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxXmlSettings\src">
-      <UniqueIdentifier>{939cb402-e43f-400b-a24f-dea4db7c9b0d}</UniqueIdentifier>
+      <UniqueIdentifier>{d62278f0-542d-43a5-89cd-ae522c5de13f}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxXmlSettings\libs">
-      <UniqueIdentifier>{ee910231-84c5-4432-a295-0ffed62e55ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Model">
-      <UniqueIdentifier>{8da83364-87f5-410b-b874-1b6d0b9e8081}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\View">
-      <UniqueIdentifier>{4f1fc378-bb57-4846-a6d1-48b810a2ed5f}</UniqueIdentifier>
+      <UniqueIdentifier>{7b0cbdf0-3397-4a05-a8ca-bcec2386d87a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxBaseGui.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxButton.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxButton.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxGui.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGui.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxGuiGroup.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxLabel.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxLabel.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxPanel.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxPanel.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxSlider.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxSliderGroup.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxToggle.h">
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h">
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h">
       <Filter>addons\ofxXmlSettings\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClInclude>
-    <ClInclude Include="src\PatternDigest.h">
-      <Filter>src\Model</Filter>
-    </ClInclude>
     <ClInclude Include="src\Operation.h">
-      <Filter>src\Model</Filter>
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\PatternDef.h">
-      <Filter>src\Model</Filter>
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\PatternView.h">
-      <Filter>src\View</Filter>
+    <ClInclude Include="src\PatternDigest.h">
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\PatternMesh.h">
-      <Filter>src\View</Filter>
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PatternView.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

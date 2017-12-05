@@ -49,19 +49,19 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -95,9 +95,9 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\addons\ofxGui\src;
-C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\addons\ofxXmlSettings\src;
-C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\addons\ofxXmlSettings\libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\addons\ofxGui\src;
+..\..\..\addons\ofxXmlSettings\src;
+..\..\..\addons\ofxXmlSettings\libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -117,9 +117,9 @@ C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_relea
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\addons\ofxGui\src;
-C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\addons\ofxXmlSettings\src;
-C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\addons\ofxXmlSettings\libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\addons\ofxGui\src;
+..\..\..\addons\ofxXmlSettings\src;
+..\..\..\addons\ofxXmlSettings\libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -139,9 +139,9 @@ C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_relea
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\addons\ofxGui\src;
-C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\addons\ofxXmlSettings\src;
-C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\addons\ofxXmlSettings\libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\addons\ofxGui\src;
+..\..\..\addons\ofxXmlSettings\src;
+..\..\..\addons\ofxXmlSettings\libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -164,9 +164,9 @@ C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_relea
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\addons\ofxGui\src;
-C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\addons\ofxXmlSettings\src;
-C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_release\addons\ofxXmlSettings\libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\addons\ofxGui\src;
+..\..\..\addons\ofxXmlSettings\src;
+..\..\..\addons\ofxXmlSettings\libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -183,18 +183,18 @@ C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_relea
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxBaseGui.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxButton.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxGuiGroup.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxLabel.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxPanel.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxSlider.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxGui\src\ofxToggle.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp" />
-    <ClCompile Include="..\..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxBaseGui.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxButton.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxLabel.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxPanel.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSlider.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Pattern.cpp" />
@@ -203,17 +203,17 @@ C:\Users\Martin\Documents\OpenFrameworks\of_v0.9.3_vs_release\of_v0.9.3_vs_relea
     <ClCompile Include="src\PatternView.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxBaseGui.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxButton.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxGui.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxGuiGroup.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxLabel.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxPanel.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxSlider.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxSliderGroup.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxGui\src\ofxToggle.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxXmlSettings\libs\tinyxml.h" />
-    <ClInclude Include="..\..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxButton.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGui.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxLabel.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxPanel.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h" />
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h" />
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Operation.h" />
     <ClInclude Include="src\PatternDef.h" />
