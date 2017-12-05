@@ -34,7 +34,7 @@ namespace ami
 		}
 
 		// recenter mesh
-		ofVec3f center;
+		glm::vec3 center;
 		for (auto & vert : m_mesh.getVertices())
 		{
 			center += vert;
@@ -66,8 +66,8 @@ namespace ami
 			radius = (float)m_pointDistance / (2.0f * sin(angle));
 		}
 
-		ofVec3f orientation(0, 0, -1);
-		orientation.rotate(((float)roundIndex / (float)(roundSize)) * 360, ofVec3f(0, 1, 0));
+		glm::vec3 orientation(0, 0, -1);
+		glm::rotate(orientation, ((float)roundIndex / (float)(roundSize)) * 360, glm::vec3(0, 1, 0));
 		
 		float roundHeight = round*0.2f;
 
@@ -77,7 +77,7 @@ namespace ami
 		{
 			case Operation::Type::LP:
 			{
-				m_mesh.addVertex(ofVec3f(0));
+				m_mesh.addVertex(glm::vec3(0));
 			
 				m_behind = m_mesh.getNumVertices() - 1;
 				m_lastUnder = m_mesh.getNumVertices() - 1;
@@ -87,7 +87,7 @@ namespace ami
 			case Operation::Type::SC:
 			{
 				// single stitch connected under
-				m_mesh.addVertex(ofVec3f(orientation.x, roundHeight, orientation.z));
+				m_mesh.addVertex(glm::vec3(orientation.x, roundHeight, orientation.z));
 
 				m_current = m_mesh.getNumVertices() - 1;
 				if (m_behind != m_lastUnder)
@@ -102,7 +102,7 @@ namespace ami
 			case Operation::Type::INC:
 			{
 				// connect to same as last stitch
-				m_mesh.addVertex(ofVec3f(orientation.x, roundHeight, orientation.z));
+				m_mesh.addVertex(glm::vec3(orientation.x, roundHeight, orientation.z));
 
 				m_current = m_mesh.getNumVertices() - 1;
 				if (m_behind != m_lastUnder)
@@ -116,7 +116,7 @@ namespace ami
 			case Operation::Type::DEC:
 			{
 				// connect to next two under
-				m_mesh.addVertex(ofVec3f(orientation.x, roundHeight, orientation.z));
+				m_mesh.addVertex(glm::vec3(orientation.x, roundHeight, orientation.z));
 
 				m_current = m_mesh.getNumVertices() - 1;
 				if (m_behind != m_lastUnder)
@@ -155,13 +155,13 @@ namespace ami
 		{
 			ofPoint point0 = m_mesh.getVertex(con->first);
 
-			ofVec3f currentTension;
-			ofVec3f idealTension;
+			glm::vec3 currentTension;
+			glm::vec3 idealTension;
 			for (auto index : con->second)
 			{
-				ofVec3f dist = m_mesh.getVertex(index) - point0;
+				glm::vec3 dist = m_mesh.getVertex(index) - point0;
 				currentTension += dist;
-				idealTension += (dist - dist.getNormalized()*m_pointDistance);
+				idealTension += (dist - glm::normalize(dist)*m_pointDistance);
 			}
 
 			m_tension[con->first] = currentTension;
@@ -178,8 +178,8 @@ namespace ami
 		unsigned int nIndices = m_mesh.getIndices().size();
 
 		vector<int> vertexFaceCount(nVertices);
-		vector< ofVec3f > vertexNormals(nVertices);
-		vector< ofVec3f > faceNormals = m_mesh.getFaceNormals();
+		vector< ofDefaultVertexType > vertexNormals(nVertices);
+		vector< ofDefaultVertexType > faceNormals = m_mesh.getFaceNormals();
 
 		for (unsigned int i = 0; i < nIndices; i++)
 		{
@@ -191,7 +191,7 @@ namespace ami
 		for (unsigned int i = 0; i < vertexNormals.size(); i++)
 		{
 			vertexNormals[i] /= vertexFaceCount[i];
-			vertexNormals[i].normalize();
+			vertexNormals[i] = glm::normalize(vertexNormals[i]);
 		}
 
 		m_mesh.addNormals(vertexNormals);
@@ -210,8 +210,8 @@ namespace ami
 		//ofSetColor(ofColor::red);
 		//for (auto & tension : m_tension)
 		//{
-		//	ofVec3f start = m_mesh.getVertex(tension.first);
-		//	ofVec3f end = start + tension.second;
+		//	glm::vec3 start = m_mesh.getVertex(tension.first);
+		//	glm::vec3 end = start + tension.second;
 		//	glBegin(GL_LINES);
 		//	glVertex3f(start.x, start.y, start.z);
 		//	glVertex3f(end.x, end.y, end.z);
@@ -220,8 +220,8 @@ namespace ami
 		ofSetColor(ofColor::blue);
 		for (auto & tension : m_idealTension)
 		{
-			ofVec3f start = m_mesh.getVertex(tension.first);
-			ofVec3f end = start + tension.second;
+			glm::vec3 start = m_mesh.getVertex(tension.first);
+			glm::vec3 end = start + tension.second;
 			glBegin(GL_LINES);
 			glVertex3f(start.x, start.y, start.z);
 			glVertex3f(end.x, end.y, end.z);
@@ -230,8 +230,8 @@ namespace ami
 		ofSetColor(ofColor::green);
 		for (auto & tension : m_expansionTension)
 		{
-			ofVec3f start = m_mesh.getVertex(tension.first);
-			ofVec3f end = start + tension.second;
+			glm::vec3 start = m_mesh.getVertex(tension.first);
+			glm::vec3 end = start + tension.second;
 			glBegin(GL_LINES);
 			glVertex3f(start.x, start.y, start.z);
 			glVertex3f(end.x, end.y, end.z);

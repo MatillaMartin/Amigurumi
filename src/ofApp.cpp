@@ -41,7 +41,7 @@ void ofApp::draw(){
 		view.render();
 	cam.end();
 
-	ofDrawBitmapStringHighlight(helpInfo, ofVec3f(50, 50, 0));
+	ofDrawBitmapStringHighlight(helpInfo, glm::vec3(50, 50, 0));
 }
 
 //--------------------------------------------------------------

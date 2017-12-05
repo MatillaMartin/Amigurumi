@@ -32,7 +32,7 @@ namespace ami
 		ofIndexType m_behind;
 		ofIndexType m_lastUnder;
 
-		std::map <ofIndexType, ofVec3f> m_tension, m_idealTension, m_expansionTension;
+		std::map <ofIndexType, glm::vec3> m_tension, m_idealTension, m_expansionTension;
 		std::map <ofIndexType, std::set<ofIndexType>> m_con;
 
 		unsigned int m_roundNum;
