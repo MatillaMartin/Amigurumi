@@ -82,7 +82,7 @@ namespace ami
 		float heightInc = m_pointDistance * 5.0f;
 		float roundProgress = (float)roundIndex / (float)roundSize;
 		float radius = radiusInc + radiusInc*round + radiusInc*roundProgress;
-		float height = heightInc + heightInc*round + heightInc*roundProgress;
+		float height = heightInc*round + heightInc*roundProgress;
 
 		ofVec3f nextVertex(0, height, -radius);
 		nextVertex.rotate(roundProgress * 360, ofVec3f(0, 1, 0));
