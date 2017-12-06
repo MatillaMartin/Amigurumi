@@ -2,6 +2,8 @@
 
 #include "ofGraphics.h"
 
+#include <numeric>
+
 namespace ami
 {
 	PatternMesh::PatternMesh() 
@@ -9,28 +11,38 @@ namespace ami
 
 	void PatternMesh::setup(float pointDistance)
 	{
+		if (pointDistance == 0.0f) pointDistance = 1.0f;
 		m_pointDistance = pointDistance;
 		m_mesh.clear();
 		m_con.clear();
-		m_tension.clear();
-		m_idealTension.clear();
+		m_constraintTension.clear();
+		m_constraintTensions.clear();
 		m_expansionTension.clear();
-
 		m_roundNum = 0;
+		m_minTension = 0.01f;
 	}
 
 	void PatternMesh::update(float deltaTime)
 	{
 		this->computeTension();
 
-		for (auto con = m_con.begin(); con != m_con.end(); con++)
+		for (auto & con = m_con.begin(); con != m_con.end(); con++)
 		{
+			ofVec3f & constrain = m_constraintTension[con->first];
+			ofVec3f & expansion = m_expansionTension[con->first];
+			if (std::abs(constrain.length() - expansion.length()) < m_minTension)
+			{
+				continue;
+			}
+
 			// inter nodal tension
-			m_mesh.getVertices()[con->first] += m_idealTension[con->first] *deltaTime;
+			m_mesh.getVertices()[con->first] += constrain * deltaTime;
 
 			// inner expansion only for connected stitches, not for the last row
 			if (con->second.size() > 4)
-				m_mesh.getVertices()[con->first] += m_expansionTension[con->first] * deltaTime;
+			{
+				m_mesh.getVertices()[con->first] += expansion * deltaTime;
+			}
 		}
 
 		// recenter mesh
@@ -43,7 +55,14 @@ namespace ami
 
 		for (auto & vert : m_mesh.getVertices())
 		{
-			vert -= center*deltaTime;
+			vert.x -= center.x*deltaTime;
+			vert.z -= center.z*deltaTime;
+		}
+
+		for (unsigned int i = 1; i < m_mesh.getNumVertices(); i++)
+		{
+			ofVec3f & vert = m_mesh.getVertices().at(i);
+			vert -= m_mesh.getVertex(0) * deltaTime;
 		}
 	}
 
@@ -59,26 +78,23 @@ namespace ami
 
 	void PatternMesh::addOperation(Operation::Type type, unsigned int round, unsigned int roundIndex, unsigned int roundSize)
 	{
-		float angle = 0, radius = 0;
-		if (roundSize > 2)
-		{
-			angle = (180.0f / (float)(roundSize-1))*DEG_TO_RAD;
-			radius = (float)m_pointDistance / (2.0f * sin(angle));
-		}
+		float radiusInc = m_pointDistance;
+		float heightInc = m_pointDistance * 5.0f;
+		float roundProgress = (float)roundIndex / (float)roundSize;
+		float radius = radiusInc + radiusInc*round + radiusInc*roundProgress;
+		float height = heightInc + heightInc*round + heightInc*roundProgress;
 
-		ofVec3f orientation(0, 0, -1);
-		orientation.rotate(((float)roundIndex / (float)(roundSize)) * 360, ofVec3f(0, 1, 0));
-		
-		float roundHeight = round*0.2f;
+		ofVec3f nextVertex(0, height, -radius);
+		nextVertex.rotate(roundProgress * 360, ofVec3f(0, 1, 0));
+
+		m_mesh.addVertex(nextVertex);
 
 		ofIndexType m_current;
 
 		switch (type)
 		{
 			case Operation::Type::LP:
-			{
-				m_mesh.addVertex(ofVec3f(0));
-			
+			{			
 				m_behind = m_mesh.getNumVertices() - 1;
 				m_lastUnder = m_mesh.getNumVertices() - 1;
 				break;
@@ -87,8 +103,6 @@ namespace ami
 			case Operation::Type::SC:
 			{
 				// single stitch connected under
-				m_mesh.addVertex(ofVec3f(orientation.x, roundHeight, orientation.z));
-
 				m_current = m_mesh.getNumVertices() - 1;
 				if (m_behind != m_lastUnder)
 				{
@@ -102,8 +116,6 @@ namespace ami
 			case Operation::Type::INC:
 			{
 				// connect to same as last stitch
-				m_mesh.addVertex(ofVec3f(orientation.x, roundHeight, orientation.z));
-
 				m_current = m_mesh.getNumVertices() - 1;
 				if (m_behind != m_lastUnder)
 				{
@@ -116,8 +128,6 @@ namespace ami
 			case Operation::Type::DEC:
 			{
 				// connect to next two under
-				m_mesh.addVertex(ofVec3f(orientation.x, roundHeight, orientation.z));
-
 				m_current = m_mesh.getNumVertices() - 1;
 				if (m_behind != m_lastUnder)
 				{
@@ -155,18 +165,21 @@ namespace ami
 		{
 			ofPoint point0 = m_mesh.getVertex(con->first);
 
-			ofVec3f currentTension;
-			ofVec3f idealTension;
+			std::vector<ofVec3f> & constraintTensions = m_constraintTensions[con->first];
+			constraintTensions.clear();
+			ofVec3f constraintTension;
 			for (auto index : con->second)
 			{
-				ofVec3f dist = m_mesh.getVertex(index) - point0;
-				currentTension += dist;
-				idealTension += (dist - dist.getNormalized()*m_pointDistance);
+				ofVec3f distVec = m_mesh.getVertex(index) - point0;
+				float dist = distVec.length();
+				if (dist == 0.0f) dist = std::numeric_limits<float>::epsilon(); // check for zero division
+				ofVec3f tension = distVec * (1.0f - m_pointDistance / dist) * 0.5f;
+				constraintTensions.push_back(tension);
 			}
+			constraintTension = std::accumulate(constraintTensions.begin(), constraintTensions.end(), ofVec3f(0));
 
-			m_tension[con->first] = currentTension;
-			m_idealTension[con->first] = idealTension;
-			m_expansionTension[con->first] = m_mesh.getNormal(con->first)*0.5f;
+			m_constraintTension[con->first] = constraintTension;
+			m_expansionTension[con->first] = m_mesh.getNormal(con->first) * m_pointDistance * 0.5f;
 		}
 	}
 
@@ -218,7 +231,7 @@ namespace ami
 		//	glEnd();
 		//}
 		ofSetColor(ofColor::blue);
-		for (auto & tension : m_idealTension)
+		for (auto & tension : m_constraintTension)
 		{
 			ofVec3f start = m_mesh.getVertex(tension.first);
 			ofVec3f end = start + tension.second;
@@ -227,6 +240,23 @@ namespace ami
 			glVertex3f(end.x, end.y, end.z);
 			glEnd();
 		}
+
+		ofSetColor(ofColor::red);
+		ofSetLineWidth(5.0f);
+		for (auto & constraint : m_constraintTensions)
+		{
+			for (auto & tension : constraint.second)
+			{
+				ofVec3f start = m_mesh.getVertex(constraint.first);
+				ofVec3f end = start + tension;
+				glBegin(GL_LINES);
+				glVertex3f(start.x, start.y, start.z);
+				glVertex3f(end.x, end.y, end.z);
+				glEnd();
+			}
+		}
+		ofSetLineWidth(1.0f);
+
 		ofSetColor(ofColor::green);
 		for (auto & tension : m_expansionTension)
 		{

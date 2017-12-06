@@ -30,4 +30,6 @@ public:
 	ofEasyCam cam;
 	PatternView view;
 	vector<PatternDef> patterns;
+
+	uint64_t lastFrameMillis;
 };

@@ -15,7 +15,7 @@ void ofApp::setup(){
 	cam.setNearClip(0.01f);
 	cam.setFarClip(10000.0f);
 
-	filepath = "pattern.xml";
+	filepath = "whale.xml";
 
 	patterns = PatternDigest::digest(filepath);
 	view.setPattern(&patterns[0]);
@@ -30,7 +30,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	view.update(ofGetLastFrameTime()*10.0f);
+	view.update(ofGetLastFrameTime() * 10.0f);
 }
 
 //--------------------------------------------------------------
