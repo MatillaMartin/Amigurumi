@@ -1,0 +1,824 @@
+<Pattern>
+	<!-- Round 1 -->
+	<Round>
+		<Operation Count="7">MR</Operation>
+	</Round>
+	<!-- Round 2 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+	</Round>
+	<!-- Round 3 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+	</Round>
+	<!-- Round 4 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+	</Round>
+	<!-- Round 5 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+	</Round>
+	<!-- Round 6 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+	</Round>
+	<!-- Round 7 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">INC</Operation>
+	</Round>
+	<!-- Round 8 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+	</Round>
+	<!-- Round 9 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+	</Round>
+	<!-- Round 10 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+	</Round>
+	<!-- Round 11 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+	</Round>
+	<!-- Round 12 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+	</Round>
+	<!-- Round 13 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+	</Round>
+	<!-- Round 14 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+	</Round>
+	<!-- Round 15 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+	</Round>
+	<!-- Round 16 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+	</Round>
+	<!-- Round 17 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+	</Round>
+	<!-- Round 18 -->
+	<Round>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+		
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">SC</Operation>
+		<Operation Count="1">DEC</Operation>
+	</Round>
+	<Round>
+		<Operation Count="28">SC</Operation>
+	</Round>
+</Pattern>
