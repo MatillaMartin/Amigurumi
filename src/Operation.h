@@ -19,7 +19,9 @@ namespace ami
 			// decrease
 			DEC,
 			// magic ring
-			MR
+			MR,
+			// finish off
+			FO,
 		};
 
 		typedef vector<Operation::Type> Operations;
@@ -32,6 +34,7 @@ namespace ami
 			if (op == "INC") return INC;
 			if (op == "DEC") return DEC;
 			if (op == "MR") return MR;
+			if (op == "FO") return FO;
 		}
 		
 		static string getString(Operation::Type op)
@@ -44,6 +47,7 @@ namespace ami
 				case INC: return "INC"; break;
 				case DEC: return "DEC"; break;
 				case MR: return "MR"; break;
+				case FO: return "FO"; break;
 				default: ofLogWarning("Operation") << "getString: Type not found";
 			}
 		}

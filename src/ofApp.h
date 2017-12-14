@@ -32,4 +32,6 @@ public:
 	vector<PatternDef> patterns;
 
 	uint64_t lastFrameMillis;
+
+	bool bRun;
 };

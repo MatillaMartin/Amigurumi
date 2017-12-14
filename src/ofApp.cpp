@@ -20,17 +20,25 @@ void ofApp::setup(){
 	patterns = PatternDigest::digest(filepath);
 	view.setPattern(&patterns[0]);
 
+	bRun = true;
+
 	helpInfo =
 		string("Left click to move camera \n") +
 		"Right click to zoom \n" +
 		"Space to reset \n" +
-		"L to load new pattern \n"
+		"L to load new pattern \n" + 
+		"P to pause and resume \n"
 		;
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	view.update(ofGetLastFrameTime() * 10.0f);
+	if (bRun)
+	{
+		float lastFrameTime = 0.04f; // 25fps
+		lastFrameTime = std::fmin(lastFrameTime, ofGetLastFrameTime());
+		view.update(ofGetLastFrameTime() * 5.0f);
+	}
 }
 
 //--------------------------------------------------------------
@@ -60,6 +68,10 @@ void ofApp::keyPressed(int key){
 			patterns = PatternDigest::digest(filepath);
 			view.setPattern(&patterns[0]);
 		}
+	}
+	if (key == 'p' || key == 'P')
+	{
+		bRun = !bRun;
 	}
 }
 
