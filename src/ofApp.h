@@ -31,7 +31,8 @@ public:
 	PatternView view;
 	vector<PatternDef> patterns;
 
-	uint64_t lastFrameMillis;
-
+	float leftOverTime;
+	float fixedUpdateMillis;
+	float fps;
 	bool bRun;
 };

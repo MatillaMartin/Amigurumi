@@ -14,12 +14,12 @@ namespace ami
 		if (pointDistance == 0.0f) pointDistance = 1.0f;
 		m_pointDistance = pointDistance;
 		m_mesh.clear();
+		m_oldVec.clear();
 		m_con.clear();
-		m_constraintTension.clear();
-		m_constraintTensions.clear();
 		m_expansionTension.clear();
 		m_roundNum = 0;
 		m_minTension = 0.1f;
+		m_damping = 0.9f;
 	}
 
 	void PatternMesh::addRound(Operation::Operations op)
@@ -44,6 +44,7 @@ namespace ami
 		nextVertex.rotate(roundProgress * 360, ofVec3f(0, 1, 0));
 
 		m_mesh.addVertex(nextVertex);
+		m_oldVec.push_back(nextVertex);
 	}
 
 	void PatternMesh::addOperation(Operation::Type type, unsigned int round, unsigned int roundIndex, unsigned int roundSize)
@@ -158,68 +159,57 @@ namespace ami
 		this->computeTension();
 
 		unsigned int stopped = 0;
+		float dt2 = deltaTime * deltaTime;
 		for (auto & con = m_con.begin(); con != m_con.end(); con++)
 		{
-			ofVec3f & constrain = m_constraintTension[con->first];
 			ofVec3f & expansion = m_expansionTension[con->first];
 			ofVec3f & vertex = m_mesh.getVertices()[con->first];
+			ofVec3f & oldVertex = m_oldVec[con->first];
 
-			if ((constrain + expansion).length() < m_minTension)
-			{
-				stopped++;
-				continue;
-			}
-
-			// inter nodal tension
-			vertex += constrain * deltaTime;
-
-			// inner expansion 
-			vertex += expansion * deltaTime;
+			// verlet update
+			ofVec3f acc = expansion; // inner expansion
+			ofVec3f vel = vertex - oldVertex; // velocity is last distance (inertia, no need for dt)
+			oldVertex = vertex;
+			vertex = vertex + vel * m_damping + acc * dt2;
 		}
 		ofLogVerbose("PatterMesh") << "Stopped: " << stopped << "/" << m_mesh.getNumVertices();
 
-		// center mesh
-		for (auto & vert : m_mesh.getVertices())
-		{
-			vert.x -= center.x*deltaTime;
-			vert.z -= center.z*deltaTime;
-		}
-
-		// center first vertex
-		for (auto & it = m_mesh.getVertices().begin() + 1; it != m_mesh.getVertices().end(); ++it)
-		{
-			*it -= m_mesh.getVertex(0) * deltaTime;
-		}
+		//// center mesh
+		//for (auto & vert : m_mesh.getVertices())
+		//{
+		//	vert.x -= center.x*deltaTime;
+		//	vert.z -= center.z*deltaTime;
+		//}
 	}
 
 	void PatternMesh::computeTension()
 	{
 		this->updateNormals();
 		
-		for (auto con = m_con.begin(); con != m_con.end(); con++)
+		for (auto & con = m_con.begin(); con != m_con.end(); con++)
 		{
-			const ofPoint & point0 = m_mesh.getVertex(con->first);
+			ofPoint & point0 = m_mesh.getVertices()[con->first];
 
-			// constrain
-			std::vector<ofVec3f> & constraintTensions = m_constraintTensions[con->first];
-			constraintTensions.clear();
-			ofVec3f constraintTension;
-			for (auto index : con->second)
+			// solve constrain
+			for (auto & index : con->second)
 			{
-				ofVec3f distVec = m_mesh.getVertex(index.first) - point0;
+				ofPoint & point1 = m_mesh.getVertices()[index.first];
+				ofVec3f distVec = point0 - point1;
 				float dist = distVec.length();
 				if (dist == 0.0f) dist = std::numeric_limits<float>::epsilon(); // check for zero division
-				ofVec3f tension = distVec * (1.0f - index.second / dist) * 0.5f;
-				constraintTensions.push_back(tension);
+				ofVec3f tension = distVec * (index.second - dist) / dist;
+				point0 += tension * 0.5f; // update vertex following constraint
+				point1 -= tension * 0.5f; // update vertex following constraint
 			}
-			constraintTension = std::accumulate(constraintTensions.begin(), constraintTensions.end(), ofVec3f(0));
-			m_constraintTension[con->first] = constraintTension;
+		}
 
+		// constrain first vertex to be in origin
+		m_mesh.getVertices()[0] = ofVec3f(0);
+
+		for (auto con = m_con.begin(); con != m_con.end(); con++)
+		{
 			// expansion
-			ofVec3f expansion;
-			expansion = m_mesh.getNormal(con->first) * m_pointDistance * 0.1f;
-
-			m_expansionTension[con->first] = expansion;
+			m_expansionTension[con->first] = m_mesh.getNormal(con->first) * 100.0f;
 		}
 	}
 
@@ -269,43 +259,28 @@ namespace ami
 		//	glVertex3f(end.x, end.y, end.z);
 		//	glEnd();
 		//}
-		ofSetColor(ofColor::blue);
-		for (auto & tension : m_constraintTension)
-		{
-			ofVec3f start = m_mesh.getVertex(tension.first);
-			ofVec3f end = start + tension.second;
-			glBegin(GL_LINES);
-			glVertex3f(start.x, start.y, start.z);
-			glVertex3f(end.x, end.y, end.z);
-			glEnd();
-		}
+		//ofSetColor(ofColor::blue);
+		//for (auto & tension : m_constraintTension)
+		//{
+		//	ofVec3f start = m_mesh.getVertex(tension.first);
+		//	ofVec3f end = start + tension.second;
+		//	glBegin(GL_LINES);
+		//	glVertex3f(start.x, start.y, start.z);
+		//	glVertex3f(end.x, end.y, end.z);
+		//	glEnd();
+		//}
 
-		ofSetColor(ofColor::red);
-		ofSetLineWidth(5.0f);
-		for (auto & constraint : m_constraintTensions)
-		{
-			for (auto & tension : constraint.second)
-			{
-				ofVec3f start = m_mesh.getVertex(constraint.first);
-				ofVec3f end = start + tension;
-				glBegin(GL_LINES);
-				glVertex3f(start.x, start.y, start.z);
-				glVertex3f(end.x, end.y, end.z);
-				glEnd();
-			}
-		}
-		ofSetLineWidth(1.0f);
 
-		ofSetColor(ofColor::green);
-		for (auto & tension : m_expansionTension)
-		{
-			ofVec3f start = m_mesh.getVertex(tension.first);
-			ofVec3f end = start + tension.second;
-			glBegin(GL_LINES);
-			glVertex3f(start.x, start.y, start.z);
-			glVertex3f(end.x, end.y, end.z);
-			glEnd();
-		}
+		//ofSetColor(ofColor::green);
+		//for (auto & tension : m_expansionTension)
+		//{
+		//	ofVec3f start = m_mesh.getVertex(tension.first);
+		//	ofVec3f end = start + tension.second;
+		//	glBegin(GL_LINES);
+		//	glVertex3f(start.x, start.y, start.z);
+		//	glVertex3f(end.x, end.y, end.z);
+		//	glEnd();
+		//}
 		ofPopStyle();
 	}
 
