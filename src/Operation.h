@@ -21,7 +21,7 @@ namespace ami
 			// magic ring
 			MR,
 			// finish off
-			FO,
+			FO
 		};
 
 		typedef vector<Operation::Type> Operations;

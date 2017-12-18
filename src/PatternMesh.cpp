@@ -6,23 +6,22 @@
 
 namespace ami
 {
-	PatternMesh::PatternMesh() 
-	{}
+	PatternMesh::PatternMesh(){}
 
-	void PatternMesh::setup(float pointDistance)
+	void PatternMesh::setup()
 	{
-		if (pointDistance == 0.0f) pointDistance = 1.0f;
-		m_pointDistance = pointDistance;
+		m_pointDistance = 1.0f;
 		m_mesh.clear();
 		m_oldVec.clear();
 		m_con.clear();
-		m_expansionTension.clear();
+		m_expansionForce.clear();
 		m_roundNum = 0;
 		m_minTension = 0.1f;
 		m_damping = 0.9f;
+		m_solveIterations = 5;
 	}
 
-	void PatternMesh::addRound(Operation::Operations op)
+	void PatternMesh::addRound(const Operation::Operations & op)
 	{
 		for (unsigned int nOp = 0; nOp < op.size(); nOp++)
 		{
@@ -146,46 +145,76 @@ namespace ami
 	void PatternMesh::mergeVertices(ofIndexType a, ofIndexType b)
 	{
 		// merging vertices does not add triangles, just adds a hard constraint of 0 distance between the vertices
-		m_con[a].insert({ b, 0.0f });
-		m_con[b].insert({ a, 0.0f });
+		m_fix[a].insert({ b, 0.0f });
+		m_fix[b].insert({ a, 0.0f });
 	}
 
 	void PatternMesh::update(float deltaTime)
 	{
-		// find mesh center
-		ofVec3f center = std::accumulate(m_mesh.getVertices().begin(), m_mesh.getVertices().end(), ofVec3f(0));
-		center /= m_mesh.getNumVertices();
+		this->updateNormals();
+		this->updateCenter();
+		this->computeForces();
+		this->verletUpdate(deltaTime);
 
-		this->computeTension();
+		// solve constraints
+		for (unsigned int i = 0; i < m_solveIterations; i++)
+		{
+			this->solveConstraints();
+		}
 
-		unsigned int stopped = 0;
+		// solve anchors
+		this->solveAnchors();
+	}
+
+	void PatternMesh::solveAnchors()
+	{
+		// solve fixtures
+		for (auto & fix = m_fix.begin(); fix != m_fix.end(); fix++)
+		{
+			ofPoint & point0 = m_mesh.getVertices()[fix->first];
+
+			// solve constrain
+			for (auto & index : fix->second)
+			{
+				ofPoint & point1 = m_mesh.getVertices()[index.first];
+				ofVec3f distVec = point0 - point1;
+				float dist = distVec.length();
+				if (dist == 0.0f) dist = std::numeric_limits<float>::epsilon(); // check for zero division
+				ofVec3f tension = distVec * (index.second - dist) / dist;
+				point0 += tension * 0.5f; // update vertex following constraint
+				point1 -= tension * 0.5f; // update vertex following constraint
+			}
+		}
+		// constrain first vertex to be in origin
+		m_mesh.getVertices()[0] = ofVec3f(0);
+
+		// center mesh
+		for (auto & vert : m_mesh.getVertices())
+		{
+			vert.x -= m_center.x;
+			vert.z -= m_center.z;
+		}
+	}
+
+	void PatternMesh::verletUpdate(float deltaTime)
+	{
 		float dt2 = deltaTime * deltaTime;
+		// verlet update
 		for (auto & con = m_con.begin(); con != m_con.end(); con++)
 		{
-			ofVec3f & expansion = m_expansionTension[con->first];
+			ofVec3f & expansion = m_expansionForce[con->first];
 			ofVec3f & vertex = m_mesh.getVertices()[con->first];
 			ofVec3f & oldVertex = m_oldVec[con->first];
 
-			// verlet update
 			ofVec3f acc = expansion; // inner expansion
 			ofVec3f vel = vertex - oldVertex; // velocity is last distance (inertia, no need for dt)
 			oldVertex = vertex;
 			vertex = vertex + vel * m_damping + acc * dt2;
 		}
-		ofLogVerbose("PatterMesh") << "Stopped: " << stopped << "/" << m_mesh.getNumVertices();
-
-		//// center mesh
-		//for (auto & vert : m_mesh.getVertices())
-		//{
-		//	vert.x -= center.x*deltaTime;
-		//	vert.z -= center.z*deltaTime;
-		//}
 	}
 
-	void PatternMesh::computeTension()
-	{
-		this->updateNormals();
-		
+	void PatternMesh::solveConstraints()
+	{		
 		for (auto & con = m_con.begin(); con != m_con.end(); con++)
 		{
 			ofPoint & point0 = m_mesh.getVertices()[con->first];
@@ -202,15 +231,22 @@ namespace ami
 				point1 -= tension * 0.5f; // update vertex following constraint
 			}
 		}
+	}
 
-		// constrain first vertex to be in origin
-		m_mesh.getVertices()[0] = ofVec3f(0);
-
+	void PatternMesh::computeForces()
+	{
 		for (auto con = m_con.begin(); con != m_con.end(); con++)
 		{
 			// expansion
-			m_expansionTension[con->first] = m_mesh.getNormal(con->first) * 100.0f;
+			m_expansionForce[con->first] = m_mesh.getNormal(con->first) * 2000.0f;
 		}
+	}
+
+	void PatternMesh::updateCenter()
+	{
+		// find mesh center
+		m_center = std::accumulate(m_mesh.getVertices().begin(), m_mesh.getVertices().end(), ofVec3f(0));
+		m_center /= m_mesh.getNumVertices();
 	}
 
 	void PatternMesh::updateNormals()

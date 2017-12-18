@@ -10,13 +10,11 @@ namespace ami
 	public:
 		PatternView();
 
-		void setPattern(PatternDef * pattern);
+		void setPattern(const PatternDef & pattern);
 
 		void render();
 
 		void update(float deltaTime);
-
-		PatternDef * m_pattern;
 
 		PatternMesh m_mesh;
 	};

@@ -1,7 +1,5 @@
 #include "ofApp.h"
 
-using namespace ami;
-
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofSetLogLevel(OF_LOG_VERBOSE);
@@ -19,7 +17,7 @@ void ofApp::setup(){
 	filepath = "whale.xml";
 
 	patterns = PatternDigest::digest(filepath);
-	view.setPattern(&patterns[0]);
+	view.setPattern(patterns[0]);
 
 	bRun = true;
 	
@@ -75,7 +73,7 @@ void ofApp::keyPressed(int key){
 	if (key == ' ')
 	{
 		patterns = PatternDigest::digest(filepath);
-		view.setPattern(&patterns[0]);
+		view.setPattern(patterns[0]);
 	}
 	if (key == 'l' || key == 'L')
 	{
@@ -84,7 +82,7 @@ void ofApp::keyPressed(int key){
 		{
 			filepath = res.filePath;
 			patterns = PatternDigest::digest(filepath);
-			view.setPattern(&patterns[0]);
+			view.setPattern(patterns[0]);
 		}
 	}
 	if (key == 'p' || key == 'P')

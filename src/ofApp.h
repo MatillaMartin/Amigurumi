@@ -24,12 +24,12 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
-	string helpInfo;
+	std::string helpInfo;
 
-	string filepath;
+	std::string filepath;
 	ofEasyCam cam;
 	PatternView view;
-	vector<PatternDef> patterns;
+	std::vector<PatternDef> patterns;
 
 	float leftOverTime;
 	float fixedUpdateMillis;

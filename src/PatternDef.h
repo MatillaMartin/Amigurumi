@@ -19,26 +19,24 @@ namespace ami
 			this->addRound(loop);
 		}
 
-		vector<PatternDef::Round>::iterator begin()
-		{
-			return rounds.begin();
+		const std::vector<Round> & getRounds() const {
+			return m_rounds;
 		}
 
-		vector<PatternDef::Round>::iterator end()
-		{
-			return rounds.end();
+		std::vector<Round> & getRounds() {
+			return m_rounds;
 		}
 
 		void addRound(Operation::Operations & round)
 		{
-			rounds.push_back(round);
+			m_rounds.push_back(round);
 		}
 
 		bool checkValid()
 		{
-			if (rounds.size() == 1) return true; // there is only a loop
+			if (m_rounds.size() == 1) return true; // there is only a loop
 
-			for (auto round = rounds.begin() + 1; round != rounds.end() - 1; round++)
+			for (auto round = m_rounds.begin() + 1; round != m_rounds.end() - 1; round++)
 			{
 				auto previousRound = round - 1;
 
@@ -69,7 +67,7 @@ namespace ami
 		}
 
 	private:
-		vector<Round> rounds;
+		std::vector<Round> m_rounds;
 
 	};
 }

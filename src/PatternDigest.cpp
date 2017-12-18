@@ -2,13 +2,13 @@
 
 namespace ami
 {
-	const string PatternDigest::tagPattern = "Pattern";
-	const string PatternDigest::tagRound = "Round";
-	const string PatternDigest::tagOperation = "Operation";
-	const string PatternDigest::attCount = "Count";
-
 	vector<PatternDef> PatternDigest::digest(const string & file)
 	{
+		const static string tagPattern = "Pattern";
+		const static string tagRound = "Round";
+		const static string tagOperation = "Operation";
+		const static string attCount = "Count";
+
 		vector<PatternDef> patterns;
 
 		if (ofFile::doesFileExist(file))

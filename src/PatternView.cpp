@@ -3,11 +3,7 @@
 namespace ami
 {
 	PatternView::PatternView()
-		:
-		m_pattern(nullptr)
-	{
-
-	}
+	{}
 
 	void PatternView::render()
 	{
@@ -19,13 +15,11 @@ namespace ami
 		m_mesh.update(deltaTime);
 	}
 
-	void PatternView::setPattern(PatternDef * pattern)
+	void PatternView::setPattern(const PatternDef & pattern)
 	{
-		m_pattern = pattern;
+		m_mesh.setup();
 
-		m_mesh.setup(1.0f);
-
-		for (auto round = m_pattern->begin(); round != m_pattern->end(); round++)
+		for (auto & round = pattern.getRounds().begin(); round != pattern.getRounds().end(); round++)
 		{
 			m_mesh.addRound(*round);
 		}
