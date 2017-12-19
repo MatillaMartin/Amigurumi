@@ -11,8 +11,8 @@ void ofApp::setup(){
 
 	// configure cam
 	cam.setDistance(30);
-	cam.setNearClip(0.01f);
-	cam.setFarClip(10000.0f);
+	cam.setNearClip(1.0f);
+	cam.setFarClip(1000.0f);
 
 	filepath = "whale.xml";
 

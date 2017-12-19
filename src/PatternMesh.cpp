@@ -15,6 +15,7 @@ namespace ami
 		m_oldVec.clear();
 		m_con.clear();
 		m_expansionForce.clear();
+		m_fix.clear();
 		m_roundNum = 0;
 		m_minTension = 0.1f;
 		m_damping = 0.9f;
@@ -99,6 +100,7 @@ namespace ami
 				m_current = m_mesh.getNumVertices() - 1;
 				if (m_behind != m_lastUnder)
 				{
+					this->addTriangle(m_behind, m_lastUnder, m_lastUnder + 1);
 					this->addTriangle(m_current, m_behind, m_lastUnder + 1);
 					this->addTriangle(m_current, m_lastUnder + 1, m_lastUnder + 2);
 				}
@@ -121,7 +123,7 @@ namespace ami
 
 					if (a != b)
 					{
-						this->mergeVertices(a, b);
+						this->setDistanceConstrain(a, b, 0.0f);
 					}
 				}
 				break;
@@ -134,25 +136,30 @@ namespace ami
 		m_mesh.addIndex(tri0);
 		m_mesh.addIndex(tri1);
 		m_mesh.addIndex(tri2);
-		m_con[tri0].insert({ tri1, m_pointDistance });
-		m_con[tri0].insert({ tri2, m_pointDistance });
-		m_con[tri1].insert({ tri0, m_pointDistance });
-		m_con[tri1].insert({ tri2, m_pointDistance });
-		m_con[tri2].insert({ tri0, m_pointDistance });
-		m_con[tri2].insert({ tri1, m_pointDistance });
+		this->setDistanceConstrain(tri0, tri1, m_pointDistance);
+		this->setDistanceConstrain(tri1, tri2, m_pointDistance);
+		this->setDistanceConstrain(tri2, tri0, m_pointDistance);
 	}
 
-	void PatternMesh::mergeVertices(ofIndexType a, ofIndexType b)
+	void PatternMesh::setDistanceConstrain(ofIndexType a, ofIndexType b, float distance)
 	{
 		// merging vertices does not add triangles, just adds a hard constraint of 0 distance between the vertices
-		m_fix[a].insert({ b, 0.0f });
-		m_fix[b].insert({ a, 0.0f });
+		m_con[a].insert({ b, distance });
+		m_con[b].insert({ a, distance });
+	}
+	void PatternMesh::setAngleConstrain(ofIndexType a, ofIndexType b, float degrees)
+	{
+		float A2 = m_pointDistance*m_pointDistance;
+
+		float distance = std::sqrt(2*A2*( 1 - std::cos(degrees * DEG_TO_RAD )));
+
+		m_soft_con[a].insert({ b, distance });
+		m_soft_con[b].insert({ a, distance });
 	}
 
 	void PatternMesh::update(float deltaTime)
 	{
 		this->updateNormals();
-		this->updateCenter();
 		this->computeForces();
 		this->verletUpdate(deltaTime);
 
@@ -162,32 +169,7 @@ namespace ami
 			this->solveConstraints();
 		}
 
-		// solve anchors
-		this->solveAnchors();
-	}
-
-	void PatternMesh::solveAnchors()
-	{
-		// solve fixtures
-		for (auto & fix = m_fix.begin(); fix != m_fix.end(); fix++)
-		{
-			ofPoint & point0 = m_mesh.getVertices()[fix->first];
-
-			// solve constrain
-			for (auto & index : fix->second)
-			{
-				ofPoint & point1 = m_mesh.getVertices()[index.first];
-				ofVec3f distVec = point0 - point1;
-				float dist = distVec.length();
-				if (dist == 0.0f) dist = std::numeric_limits<float>::epsilon(); // check for zero division
-				ofVec3f tension = distVec * (index.second - dist) / dist;
-				point0 += tension * 0.5f; // update vertex following constraint
-				point1 -= tension * 0.5f; // update vertex following constraint
-			}
-		}
-		// constrain first vertex to be in origin
-		m_mesh.getVertices()[0] = ofVec3f(0);
-
+		this->updateCenter();
 		// center mesh
 		for (auto & vert : m_mesh.getVertices())
 		{
@@ -215,11 +197,11 @@ namespace ami
 
 	void PatternMesh::solveConstraints()
 	{		
+		// solve constrains
 		for (auto & con = m_con.begin(); con != m_con.end(); con++)
 		{
 			ofPoint & point0 = m_mesh.getVertices()[con->first];
 
-			// solve constrain
 			for (auto & index : con->second)
 			{
 				ofPoint & point1 = m_mesh.getVertices()[index.first];
@@ -227,10 +209,36 @@ namespace ami
 				float dist = distVec.length();
 				if (dist == 0.0f) dist = std::numeric_limits<float>::epsilon(); // check for zero division
 				ofVec3f tension = distVec * (index.second - dist) / dist;
+
 				point0 += tension * 0.5f; // update vertex following constraint
 				point1 -= tension * 0.5f; // update vertex following constraint
 			}
 		}
+		
+		// solve soft constrains
+		for (auto & con = m_soft_con.begin(); con != m_soft_con.end(); con++)
+		{
+			ofPoint & point0 = m_mesh.getVertices()[con->first];
+
+			for (auto & index : con->second)
+			{
+				ofPoint & point1 = m_mesh.getVertices()[index.first];
+				ofVec3f distVec = point0 - point1;
+				float dist = distVec.length();
+				// apply tension only if the distance is smaller than the desired distance
+				if (index.second < dist)
+				{
+					if (dist == 0.0f) dist = std::numeric_limits<float>::epsilon(); // check for zero division
+					ofVec3f tension = distVec * (index.second - dist) / dist;
+
+					point0 += tension * 0.5f; // update vertex following constraint
+					point1 -= tension * 0.5f; // update vertex following constraint
+				}
+			}
+		}
+
+		// constrain first vertex to be in origin
+		m_mesh.getVertices()[0] = ofVec3f(0);
 	}
 
 	void PatternMesh::computeForces()
@@ -283,8 +291,10 @@ namespace ami
 		ofSetColor(ofColor(255));
 		glPointSize(3.0f);
 		m_mesh.drawVertices();
+		m_mesh.draw();
+		ofSetColor(0);
+		ofSetLineWidth(2.0f);
 		m_mesh.drawWireframe();
-		//m_mesh.draw();
 		//ofSetColor(ofColor::red);
 		//for (auto & tension : m_tension)
 		//{

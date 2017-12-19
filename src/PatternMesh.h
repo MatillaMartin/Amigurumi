@@ -20,13 +20,17 @@ namespace ami
 
 		void draw();
 	private:
+		struct Properties
+		{
+			bool isFix;
+		};
 
 		void insertNextVertex(unsigned int round, unsigned int roundIndex, unsigned int roundSize);
 		void addTriangle(ofIndexType tri0, ofIndexType tri1, ofIndexType tri2);
-		void mergeVertices(ofIndexType a, ofIndexType b);
+		void setDistanceConstrain(ofIndexType a, ofIndexType b, float distance);
+		void setAngleConstrain(ofIndexType a, ofIndexType b, float degrees);
 		void solveConstraints();
 		void computeForces();
-		void solveAnchors();
 		void verletUpdate(float deltaTime);
 		void updateCenter();
 		void updateNormals();
@@ -38,8 +42,9 @@ namespace ami
 		ofVec3f m_center;
 
 		std::map <ofIndexType, ofVec3f> m_expansionForce;
-		std::map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_fix;
+		std::map <ofIndexType, Properties> m_fix;
 		std::map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_con;
+		std::map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_soft_con;
 
 		std::vector<ofVec3f> m_oldVec;
 
