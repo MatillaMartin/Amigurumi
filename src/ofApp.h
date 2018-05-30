@@ -35,4 +35,5 @@ public:
 	float fixedUpdateMillis;
 	float fps;
 	bool bRun;
+	bool bSlow;
 };

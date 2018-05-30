@@ -14,6 +14,7 @@ namespace ami
 		m_mesh.clear();
 		m_oldVec.clear();
 		m_con.clear();
+		m_soft_con.clear();
 		m_expansionForce.clear();
 		m_fix.clear();
 		m_roundNum = 0;
@@ -56,15 +57,18 @@ namespace ami
 			case Operation::Type::LP:
 			{
 				this->insertNextVertex(round, roundIndex, roundSize);
-				
+				m_current = m_mesh.getNumVertices() - 1;
 				m_behind = m_mesh.getNumVertices() - 1;
 				m_lastUnder = m_mesh.getNumVertices() - 1;
+
+				m_lastUnders[m_current] = m_lastUnder;
 				break;
 			}
 
 			case Operation::Type::SC:
 			{
 				this->insertNextVertex(round, roundIndex, roundSize);
+				m_lastUnders[m_current] = m_lastUnder;
 
 				// single stitch connected under
 				m_current = m_mesh.getNumVertices() - 1;
@@ -72,10 +76,13 @@ namespace ami
 				{
 					this->addTriangle(m_behind, m_lastUnder, m_lastUnder + 1);
 					this->addTriangle(m_current, m_behind, m_lastUnder + 1);
+					this->setAngleConstrain(m_current, m_lastUnders[m_lastUnder], 180);
+					this->setAngleConstrain(m_current, m_behind - 1, 180);
 				}
+				m_lastUnders[m_current] = m_lastUnder + 1;
+
 				m_behind++;
 				m_lastUnder++;
-
 				break;
 			}
 			case Operation::Type::INC:
@@ -87,7 +94,11 @@ namespace ami
 				if (m_behind != m_lastUnder)
 				{
 					this->addTriangle(m_current, m_behind, m_lastUnder);
+					this->setAngleConstrain(m_current, m_lastUnders[m_lastUnder], 180);
+					this->setAngleConstrain(m_current, m_behind - 1, 180);
 				}
+				m_lastUnders[m_current] = m_lastUnder + 1;
+
 				m_behind++;
 
 				break;
@@ -103,7 +114,11 @@ namespace ami
 					this->addTriangle(m_behind, m_lastUnder, m_lastUnder + 1);
 					this->addTriangle(m_current, m_behind, m_lastUnder + 1);
 					this->addTriangle(m_current, m_lastUnder + 1, m_lastUnder + 2);
+					this->setAngleConstrain(m_current, m_lastUnders[m_lastUnder], 180);
+					this->setAngleConstrain(m_current, m_behind - 1, 180);
 				}
+				m_lastUnders[m_current] = m_lastUnder + 1;
+
 				m_behind++;
 				m_lastUnder += 2;
 
@@ -147,6 +162,7 @@ namespace ami
 		m_con[a].insert({ b, distance });
 		m_con[b].insert({ a, distance });
 	}
+
 	void PatternMesh::setAngleConstrain(ofIndexType a, ofIndexType b, float degrees)
 	{
 		float A2 = m_pointDistance*m_pointDistance;
@@ -173,8 +189,7 @@ namespace ami
 		// center mesh
 		for (auto & vert : m_mesh.getVertices())
 		{
-			vert.x -= m_center.x;
-			vert.z -= m_center.z;
+			vert -= m_center;
 		}
 	}
 
@@ -226,19 +241,20 @@ namespace ami
 				ofVec3f distVec = point0 - point1;
 				float dist = distVec.length();
 				// apply tension only if the distance is smaller than the desired distance
-				if (index.second < dist)
+				if (dist < index.second)
 				{
 					if (dist == 0.0f) dist = std::numeric_limits<float>::epsilon(); // check for zero division
 					ofVec3f tension = distVec * (index.second - dist) / dist;
 
-					point0 += tension * 0.5f; // update vertex following constraint
-					point1 -= tension * 0.5f; // update vertex following constraint
+					point0 += tension; // update vertex following constraint
+					point1 -= tension; // update vertex following constraint
 				}
 			}
 		}
 
-		// constrain first vertex to be in origin
-		m_mesh.getVertices()[0] = ofVec3f(0);
+		// constrain first vertex to be in y axis
+		m_mesh.getVertices()[0].x = 0;
+		m_mesh.getVertices()[0].z = 0;
 	}
 
 	void PatternMesh::computeForces()
@@ -246,7 +262,7 @@ namespace ami
 		for (auto con = m_con.begin(); con != m_con.end(); con++)
 		{
 			// expansion
-			m_expansionForce[con->first] = m_mesh.getNormal(con->first) * 2000.0f;
+			//m_expansionForce[con->first] = m_mesh.getNormal(con->first) * 5000.0f;
 		}
 	}
 
@@ -291,42 +307,40 @@ namespace ami
 		ofSetColor(ofColor(255));
 		glPointSize(3.0f);
 		m_mesh.drawVertices();
-		m_mesh.draw();
-		ofSetColor(0);
-		ofSetLineWidth(2.0f);
+		//m_mesh.draw();
+		//ofSetColor(0);
+		
 		m_mesh.drawWireframe();
-		//ofSetColor(ofColor::red);
-		//for (auto & tension : m_tension)
-		//{
-		//	ofVec3f start = m_mesh.getVertex(tension.first);
-		//	ofVec3f end = start + tension.second;
-		//	glBegin(GL_LINES);
-		//	glVertex3f(start.x, start.y, start.z);
-		//	glVertex3f(end.x, end.y, end.z);
-		//	glEnd();
-		//}
+
+		ofSetLineWidth(5.0f);
 		//ofSetColor(ofColor::blue);
-		//for (auto & tension : m_constraintTension)
+		//for (auto & con : m_con)
 		//{
-		//	ofVec3f start = m_mesh.getVertex(tension.first);
-		//	ofVec3f end = start + tension.second;
-		//	glBegin(GL_LINES);
-		//	glVertex3f(start.x, start.y, start.z);
-		//	glVertex3f(end.x, end.y, end.z);
-		//	glEnd();
+		//	for (auto & index : con.second)
+		//	{
+		//		ofVec3f & start = m_mesh.getVertices()[con.first];
+		//		ofVec3f & end = m_mesh.getVertices()[index.first];
+		//		glBegin(GL_LINES);
+		//		glVertex3f(start.x, start.y, start.z);
+		//		glVertex3f(end.x, end.y, end.z);
+		//		glEnd();
+		//	}
 		//}
+		ofEnableDepthTest();
+		ofSetColor(ofColor::green);
+		for (auto & con : m_soft_con)
+		{
+			for (auto & index : con.second)
+			{
+				ofVec3f & start = m_mesh.getVertices()[con.first];
+				ofVec3f & end = m_mesh.getVertices()[index.first];
+				glBegin(GL_LINES);
+				glVertex3f(start.x, start.y, start.z);
+				glVertex3f(end.x, end.y, end.z);
+				glEnd();
+			}
+		}
 
-
-		//ofSetColor(ofColor::green);
-		//for (auto & tension : m_expansionTension)
-		//{
-		//	ofVec3f start = m_mesh.getVertex(tension.first);
-		//	ofVec3f end = start + tension.second;
-		//	glBegin(GL_LINES);
-		//	glVertex3f(start.x, start.y, start.z);
-		//	glVertex3f(end.x, end.y, end.z);
-		//	glEnd();
-		//}
 		ofPopStyle();
 	}
 

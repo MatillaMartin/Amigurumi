@@ -45,6 +45,7 @@ namespace ami
 		std::map <ofIndexType, Properties> m_fix;
 		std::map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_con;
 		std::map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_soft_con;
+		std::map <ofIndexType, ofIndexType> m_lastUnders;
 
 		std::vector<ofVec3f> m_oldVec;
 

@@ -20,7 +20,7 @@ void ofApp::setup(){
 	view.setPattern(patterns[0]);
 
 	bRun = true;
-	
+	bSlow = false;
 	fixedUpdateMillis = 0.016f; // simulate update every 16ms
 	leftOverTime = 0.0f;
 
@@ -39,7 +39,7 @@ void ofApp::update(){
 	{
 		// fixed update time, lasting a total of a frame time
 		float elapsedTime = 2.0f / fps; // maximum allowed elapsed time is twice the fps, to avoid peaks
-		elapsedTime = std::fmin(elapsedTime, ofGetLastFrameTime() * 1.0f);
+		elapsedTime = std::fmin(elapsedTime, ofGetLastFrameTime());
 
 		// add time that couldn't be used last frame
 		elapsedTime += leftOverTime;
@@ -88,6 +88,10 @@ void ofApp::keyPressed(int key){
 	if (key == 'p' || key == 'P')
 	{
 		bRun = !bRun;
+	}
+	if (key == 's' || key == 'S')
+	{
+		bSlow = !bSlow;
 	}
 }
 
