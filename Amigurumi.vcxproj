@@ -214,6 +214,7 @@
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h" />
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h" />
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
+    <ClInclude Include="src\cxxopts.hpp" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Operation.h" />
     <ClInclude Include="src\PatternDef.h" />

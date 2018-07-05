@@ -18,7 +18,7 @@ namespace ami
 		m_fix.clear();
 		m_roundNum = 0;
 		m_minTension = 0.1f;
-		m_damping = 0.9f;
+		m_damping = 0.1f;
 		m_solveIterations = 5;
 	}
 
@@ -191,7 +191,10 @@ namespace ami
 			ofVec3f acc = expansion; // inner expansion
 			ofVec3f vel = vertex - oldVertex; // velocity is last distance (inertia, no need for dt)
 			oldVertex = vertex;
-			vertex = vertex + vel * m_damping + acc * dt2;
+
+			ofVec3f acceleration = acc * dt2;
+			ofVec3f velocity = vel * m_damping;
+			vertex = vertex + velocity + acceleration;
 		}
 	}
 
@@ -238,15 +241,29 @@ namespace ami
 		}
 
 		// constrain first vertex to be in origin
-		m_mesh.getVertices()[0] = ofVec3f(0);
+		if (m_mesh.getNumVertices() > 0)
+		{
+			m_mesh.getVertices()[0] = ofVec3f(0);
+		}
 	}
 
 	void PatternMesh::computeForces()
 	{
-		for (auto con = m_con.begin(); con != m_con.end(); con++)
+		for (auto & con = m_con.begin(); con != m_con.end(); con++)
 		{
 			// expansion
-			m_expansionForce[con->first] = m_mesh.getNormal(con->first) * 2000.0f;
+			ofVec3f avgNormal;
+			for (auto & index : con->second)
+			{
+				// compute average normal of neighbours
+				avgNormal += m_mesh.getNormal(index.first);
+			}
+			if (!con->second.empty())
+			{
+				avgNormal /= con->second.empty();
+			}
+
+			m_expansionForce[con->first] = avgNormal * 1000.0f;
 		}
 	}
 
@@ -288,12 +305,11 @@ namespace ami
 	{
 		ofPushStyle();
 
-		ofSetColor(ofColor(255));
-		glPointSize(3.0f);
+		ofSetColor(255);
+		glPointSize(5.0f);
 		m_mesh.drawVertices();
-		m_mesh.draw();
-		ofSetColor(0);
-		ofSetLineWidth(2.0f);
+		//m_mesh.draw();
+		ofSetColor(200);
 		m_mesh.drawWireframe();
 		//ofSetColor(ofColor::red);
 		//for (auto & tension : m_tension)
@@ -317,16 +333,37 @@ namespace ami
 		//}
 
 
-		//ofSetColor(ofColor::green);
-		//for (auto & tension : m_expansionTension)
+		ofSetColor(ofColor::green);
+		for (auto & tension : m_expansionForce)
+		{
+			ofVec3f start = m_mesh.getVertex(tension.first);
+			ofVec3f end = start + tension.second.getNormalized();
+			glBegin(GL_LINES);
+			glVertex3f(start.x, start.y, start.z);
+			glVertex3f(end.x, end.y, end.z);
+			glEnd();
+		}
+		
+		//ofSetLineWidth(5.0f);
+		//ofSetColor(ofColor::red);
+		//for (auto & con = m_con.begin(); con != m_con.end(); con++)
 		//{
-		//	ofVec3f start = m_mesh.getVertex(tension.first);
-		//	ofVec3f end = start + tension.second;
-		//	glBegin(GL_LINES);
-		//	glVertex3f(start.x, start.y, start.z);
-		//	glVertex3f(end.x, end.y, end.z);
-		//	glEnd();
+		//	ofPoint & point0 = m_mesh.getVertices()[con->first];
+
+		//	for (auto & index : con->second)
+		//	{
+		//		ofPoint & point1 = m_mesh.getVertices()[index.first];
+
+		//		ofVec3f start = point0;
+		//		ofVec3f end = start + (point1 - point0).getNormalized()*m_pointDistance;
+
+		//		glBegin(GL_LINES);
+		//		glVertex3f(start.x, start.y, start.z);
+		//		glVertex3f(end.x, end.y, end.z);
+		//		glEnd();
+		//	}
 		//}
+
 		ofPopStyle();
 	}
 

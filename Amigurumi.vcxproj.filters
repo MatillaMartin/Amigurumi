@@ -131,6 +131,9 @@
     <ClInclude Include="src\PatternView.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\cxxopts.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

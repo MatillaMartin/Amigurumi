@@ -10,6 +10,12 @@ using namespace ami;
 class ofApp : public ofBaseApp {
 
 public:
+	struct Settings
+	{
+		bool step;
+	};
+
+	ofApp(const ofApp::Settings & settings);
 	void setup();
 	void update();
 	void draw();
@@ -24,15 +30,17 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
-	std::string helpInfo;
+	std::string m_helpInfo;
 
-	std::string filepath;
-	ofEasyCam cam;
-	PatternView view;
-	std::vector<PatternDef> patterns;
+	std::string m_filepath;
+	ofEasyCam m_cam;
+	PatternView m_view;
+	std::vector<PatternDef> m_patterns;
 
-	float leftOverTime;
-	float fixedUpdateMillis;
-	float fps;
-	bool bRun;
+	float m_leftOverTime;
+	float m_fixedUpdateMillis;
+	float m_fps;
+	bool m_bRun;
+
+	ofApp::Settings m_settings;
 };
