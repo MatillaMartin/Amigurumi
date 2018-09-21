@@ -199,7 +199,7 @@ namespace ami
 	}
 
 	void PatternMesh::solveConstraints()
-	{		
+	{
 		// solve constrains
 		for (auto & con = m_con.begin(); con != m_con.end(); con++)
 		{
@@ -216,6 +216,8 @@ namespace ami
 				point0 += tension * 0.5f; // update vertex following constraint
 				point1 -= tension * 0.5f; // update vertex following constraint
 			}
+
+			m_mesh.getVertices()[0] = ofVec3f(0); // insist on this constraint
 		}
 		
 		// solve soft constrains
@@ -239,12 +241,6 @@ namespace ami
 				}
 			}
 		}
-
-		// constrain first vertex to be in origin
-		if (m_mesh.getNumVertices() > 0)
-		{
-			m_mesh.getVertices()[0] = ofVec3f(0);
-		}
 	}
 
 	void PatternMesh::computeForces()
@@ -260,10 +256,10 @@ namespace ami
 			}
 			if (!con->second.empty())
 			{
-				avgNormal /= con->second.empty();
+				avgNormal /= con->second.size();
 			}
 
-			m_expansionForce[con->first] = avgNormal * 1000.0f;
+			m_expansionForce[con->first] = avgNormal * 20000.0f;
 		}
 	}
 
@@ -304,11 +300,13 @@ namespace ami
 	void PatternMesh::draw()
 	{
 		ofPushStyle();
-
+		ofDisableDepthTest();
+		ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ALPHA);
 		ofSetColor(255);
 		glPointSize(5.0f);
 		m_mesh.drawVertices();
-		//m_mesh.draw();
+		ofSetColor(200, 50);
+		m_mesh.draw();
 		ofSetColor(200);
 		m_mesh.drawWireframe();
 		//ofSetColor(ofColor::red);
