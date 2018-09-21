@@ -36,7 +36,8 @@ void ofApp::setup(){
 		"Right click to zoom \n" +
 		"Space to reset \n" +
 		"L to load new pattern \n" + 
-		"P to pause and resume \n"
+		"P to pause and resume \n" +
+		"S to run an update step \n"
 		;
 }
 
@@ -59,10 +60,16 @@ void ofApp::update(){
 
 		// update with a fixed timestep many times
 		for (unsigned int i = 0; i < timesteps; i++) {
-			m_view.update(m_fixedUpdateMillis);
+			updateStep(m_fixedUpdateMillis);
 		}
 	}
 }
+
+void ofApp::updateStep(float dt)
+{
+	m_view.update(dt);
+}
+
 
 //--------------------------------------------------------------
 void ofApp::draw(){
@@ -72,11 +79,11 @@ void ofApp::draw(){
 		m_view.render();
 		m_cam.end();
 
-	ofDrawBitmapStringHighlight(m_helpInfo, ofVec3f(50, 50, 0));
+	ofDrawBitmapStringHighlight(m_helpInfo, glm::vec3(50, 50, 0));
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
+void ofApp::keyPressed(int key) {
 	if (key == ' ')
 	{
 		m_patterns = PatternDigest::digest(m_filepath);
@@ -95,6 +102,11 @@ void ofApp::keyPressed(int key){
 	if (key == 'p' || key == 'P')
 	{
 		m_bRun = !m_bRun;
+	}
+
+	if (key == 's' || key == 'S')
+	{
+		this->updateStep(m_fixedUpdateMillis);
 	}
 }
 

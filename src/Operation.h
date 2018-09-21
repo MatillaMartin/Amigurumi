@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ofUtils.h"
+#include "ofLog.h"
 
 namespace ami
 {
@@ -24,9 +24,9 @@ namespace ami
 			FO
 		};
 
-		typedef vector<Operation::Type> Operations;
+		typedef std::vector<Operation::Type> Operations;
 
-		static Operation::Type getOperation(const string & op)
+		static Operation::Type getOperation(const std::string & op)
 		{
 			if (op == "LP") return LP;
 			//if (op == "CH") return CH;
@@ -37,7 +37,7 @@ namespace ami
 			if (op == "FO") return FO;
 		}
 		
-		static string getString(Operation::Type op)
+		static std::string getString(Operation::Type op)
 		{
 			switch (op)
 			{

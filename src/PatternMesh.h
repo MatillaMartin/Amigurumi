@@ -39,14 +39,14 @@ namespace ami
 		
 		ofIndexType m_behind;
 		ofIndexType m_lastUnder;
-		ofVec3f m_center;
+		glm::vec3 m_center;
 
-		std::map <ofIndexType, ofVec3f> m_expansionForce;
+		std::map <ofIndexType, glm::vec3> m_expansionForce;
 		std::map <ofIndexType, Properties> m_fix;
 		std::map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_con;
 		std::map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_soft_con;
 
-		std::vector<ofVec3f> m_oldVec;
+		std::vector<glm::vec3> m_oldVec;
 
 		unsigned int m_roundNum;
 		float m_pointDistance;
