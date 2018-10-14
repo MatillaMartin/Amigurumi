@@ -11,11 +11,11 @@ namespace ami
 			// loop
 			LP,
 			// crochet
-			CH, 
+			CH,
 			// single crochet
-			SC, 
+			SC,
 			// increase
-			INC, 
+			INC,
 			// decrease
 			DEC,
 			// magic ring
@@ -68,8 +68,10 @@ namespace ami
 
 		static Operations parseOperation(Operation::Type op, unsigned int count)
 		{
-			// magic ring consists on "count inc"
-			if (op == MR) return Operations(count, INC);
+			if (op == MR)
+			{
+				return Operations(count, INC); // magic ring consists on "count inc"
+			}
 			// for the rest its simply the operation n times
 			else
 			{

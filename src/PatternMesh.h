@@ -4,19 +4,17 @@
 #include "PatternDef.h"
 
 #include <set>
+#include "PatternGraph.h"
 
 namespace ami
 {
 	class PatternMesh
 	{
 	public:
-		PatternMesh();
+		PatternMesh() {};
+		PatternMesh(const PatternGraph & graph);
 
-		void setup();
 		void update(float deltaTime);
-
-		void addRound(const Operation::Operations & op);
-		void addOperation(Operation::Type type, unsigned int round, unsigned int roundIndex, unsigned int roundSize);
 
 		void draw();
 	private:
@@ -25,7 +23,6 @@ namespace ami
 			bool isFix;
 		};
 
-		void insertNextVertex(unsigned int round, unsigned int roundIndex, unsigned int roundSize);
 		void addTriangle(ofIndexType tri0, ofIndexType tri1, ofIndexType tri2);
 		void setDistanceConstrain(ofIndexType a, ofIndexType b, float distance);
 		void setAngleConstrain(ofIndexType a, ofIndexType b, float degrees);
@@ -36,13 +33,11 @@ namespace ami
 		void updateNormals();
 
 		ofMesh m_mesh;
-		
-		ofIndexType m_behind;
-		ofIndexType m_lastUnder;
+
 		glm::vec3 m_center;
 
 		std::map <ofIndexType, glm::vec3> m_expansionForce;
-		std::map <ofIndexType, Properties> m_fix;
+		std::map <ofIndexType, Properties> m_properties;
 		std::map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_con;
 		std::map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_soft_con;
 

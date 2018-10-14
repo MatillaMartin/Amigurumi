@@ -35,5 +35,4 @@ int main(int argc, char *argv[]) {
 		std::cout << "error parsing options: " << e.what() << std::endl;
 		exit(1);
 	}
-
 }

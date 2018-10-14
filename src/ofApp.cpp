@@ -1,5 +1,5 @@
 #include "ofApp.h"
-
+#include "PatternGraph.h"
 
 //--------------------------------------------------------------
 ofApp::ofApp(const ofApp::Settings & settings)
@@ -23,8 +23,16 @@ void ofApp::setup(){
 
 	m_filepath = "whale.xml";
 
-	m_patterns = PatternDigest::digest(m_filepath);
-	m_view.setPattern(m_patterns[0], m_settings.step);
+	try
+	{
+		m_patterns = PatternDigest::digest(m_filepath);
+		m_view.setPattern(m_patterns[0], m_settings.step);
+	}
+	catch (std::invalid_argument & e)
+	{
+		ofLogError("ofApp") << "Pattern graph failed: " << e.what();
+		ofExit();
+	}
 
 	m_bRun = true;
 	
@@ -95,8 +103,15 @@ void ofApp::keyPressed(int key) {
 		if (res.bSuccess)
 		{
 			m_filepath = res.filePath;
-			m_patterns = PatternDigest::digest(m_filepath);
-			m_view.setPattern(m_patterns[0]);
+			try
+			{
+				m_patterns = PatternDigest::digest(m_filepath);
+				m_view.setPattern(m_patterns[0], m_settings.step);
+			}
+			catch (std::invalid_argument & e)
+			{
+				ofLogError("ofApp") << "Pattern graph failed: " << e.what();
+			}
 		}
 	}
 	if (key == 'p' || key == 'P')

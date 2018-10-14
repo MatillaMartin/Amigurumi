@@ -6,139 +6,40 @@
 
 namespace ami
 {
-	PatternMesh::PatternMesh(){}
-
-	void PatternMesh::setup()
+	PatternMesh::PatternMesh(const PatternGraph & graph)
+		:
+		m_pointDistance (1.0f),
+		m_roundNum (0),
+		m_minTension (0.1f),
+		m_damping (0.1f),
+		m_solveIterations (5)
 	{
-		m_pointDistance = 1.0f;
-		m_mesh.clear();
-		m_oldVec.clear();
-		m_con.clear();
-		m_expansionForce.clear();
-		m_fix.clear();
-		m_roundNum = 0;
-		m_minTension = 0.1f;
-		m_damping = 0.1f;
-		m_solveIterations = 5;
-	}
 
-	void PatternMesh::addRound(const Operation::Operations & op)
-	{
-		for (unsigned int nOp = 0; nOp < op.size(); nOp++)
+		unsigned int nodeIndex = 0; 
+		for (auto & node : graph.getNodes())
 		{
-			addOperation(op[nOp], m_roundNum, nOp, op.size());
+			float heightInc = m_pointDistance;
+			float radius = m_pointDistance * 2.0f;
+			float height = heightInc*nodeIndex/ 10.f;
+			
+			glm::vec3 vertex(0, height, -radius);
+			vertex = glm::rotate(vertex, nodeIndex/10.f * (float)TWO_PI, glm::vec3(0.0f, 1.0f, 0.0f));
+
+			m_mesh.addVertex(vertex);
+			m_oldVec.push_back(vertex);
+
+			nodeIndex++;
 		}
 
-		m_roundNum++;
-	}
-
-	void PatternMesh::insertNextVertex(unsigned int round, unsigned int roundIndex, unsigned int roundSize)
-	{
-		float radiusInc = m_pointDistance;
-		float heightInc = m_pointDistance * 5.0f;
-		float roundProgress = (float)roundIndex / (float)roundSize;
-		float radius = radiusInc + radiusInc*round + radiusInc*roundProgress;
-		float height = heightInc*round + heightInc*roundProgress;
-
-		glm::vec3 nextVertex(0, height, -radius);
-		nextVertex = glm::rotate(nextVertex, roundProgress * (float)TWO_PI, glm::vec3(0.0f, 1.0f, 0.0f));
-
-		m_mesh.addVertex(nextVertex);
-		m_oldVec.push_back(nextVertex);
-	}
-
-	void PatternMesh::addOperation(Operation::Type type, unsigned int round, unsigned int roundIndex, unsigned int roundSize)
-	{
-		ofIndexType m_current;
-
-		switch (type)
+		for (auto & edge : graph.getEdges())
 		{
-			case Operation::Type::LP:
-			{
-				this->insertNextVertex(round, roundIndex, roundSize);
-				
-				m_behind = m_mesh.getNumVertices() - 1;
-				m_lastUnder = m_mesh.getNumVertices() - 1;
-				break;
-			}
-
-			case Operation::Type::SC:
-			{
-				this->insertNextVertex(round, roundIndex, roundSize);
-
-				// single stitch connected under
-				m_current = m_mesh.getNumVertices() - 1;
-				if (m_behind != m_lastUnder)
-				{
-					this->addTriangle(m_behind, m_lastUnder, m_lastUnder + 1);
-					this->addTriangle(m_current, m_behind, m_lastUnder + 1);
-				}
-				m_behind++;
-				m_lastUnder++;
-
-				break;
-			}
-			case Operation::Type::INC:
-			{
-				this->insertNextVertex(round, roundIndex, roundSize);
-
-				// connect to same as last stitch
-				m_current = m_mesh.getNumVertices() - 1;
-				if (m_behind != m_lastUnder)
-				{
-					this->addTriangle(m_current, m_behind, m_lastUnder);
-				}
-				m_behind++;
-
-				break;
-			}
-			case Operation::Type::DEC:
-			{
-				this->insertNextVertex(round, roundIndex, roundSize);
-
-				// connect to next two under
-				m_current = m_mesh.getNumVertices() - 1;
-				if (m_behind != m_lastUnder)
-				{
-					this->addTriangle(m_behind, m_lastUnder, m_lastUnder + 1);
-					this->addTriangle(m_current, m_behind, m_lastUnder + 1);
-					this->addTriangle(m_current, m_lastUnder + 1, m_lastUnder + 2);
-				}
-				m_behind++;
-				m_lastUnder += 2;
-
-				break;
-			}
-			case Operation::Type::FO:
-			{
-				// this operation does not add a new vertex
-				unsigned int distance = m_behind - (m_lastUnder + 1);
-				unsigned int halfDist = std::floor((float)distance / 2.0f);
-
-				for (unsigned int i = 0; i < halfDist; i++)
-				{
-					// "a" points to first vertices, "b" points to complementary to stitch
-					unsigned int a = m_lastUnder + 1 + i;
-					unsigned int b = m_behind - i;
-
-					if (a != b)
-					{
-						this->setDistanceConstrain(a, b, 0.0f);
-					}
-				}
-				break;
-			}
+			setDistanceConstrain(edge.from, edge.to, edge.distance * m_pointDistance);
 		}
-	}
-
-	void PatternMesh::addTriangle(ofIndexType tri0, ofIndexType tri1, ofIndexType tri2)
-	{
-		m_mesh.addIndex(tri0);
-		m_mesh.addIndex(tri1);
-		m_mesh.addIndex(tri2);
-		this->setDistanceConstrain(tri0, tri1, m_pointDistance);
-		this->setDistanceConstrain(tri1, tri2, m_pointDistance);
-		this->setDistanceConstrain(tri2, tri0, m_pointDistance);
+		
+		for (auto & face : graph.getFaces())
+		{
+			m_mesh.addIndices(&face.ids[0], 3);
+		}
 	}
 
 	void PatternMesh::setDistanceConstrain(ofIndexType a, ofIndexType b, float distance)
@@ -209,7 +110,7 @@ namespace ami
 			{
 				glm::vec3 & point1 = m_mesh.getVertices()[index.first];
 				glm::vec3 distVec = point0 - point1;
-				float dist = distVec.length();
+				float dist = glm::length(distVec);
 				if (dist == 0.0f) dist = std::numeric_limits<float>::epsilon(); // check for zero division
 				glm::vec3 tension = distVec * (index.second - dist) / dist;
 
@@ -229,7 +130,7 @@ namespace ami
 			{
 				glm::vec3 & point1 = m_mesh.getVertices()[index.first];
 				glm::vec3 distVec = point0 - point1;
-				float dist = distVec.length();
+				float dist = glm::length(distVec);
 				// apply tension only if the distance is smaller than the desired distance
 				if (index.second < dist)
 				{
@@ -259,7 +160,7 @@ namespace ami
 				avgNormal /= con->second.size();
 			}
 
-			m_expansionForce[con->first] = avgNormal * 20000.0f;
+			m_expansionForce[con->first] = avgNormal * 2000.0f;
 		}
 	}
 
@@ -305,8 +206,8 @@ namespace ami
 		ofSetColor(255);
 		glPointSize(5.0f);
 		m_mesh.drawVertices();
-		ofSetColor(200, 50);
-		m_mesh.draw();
+		//ofSetColor(200, 50);
+		//m_mesh.draw();
 		ofSetColor(200);
 		m_mesh.drawWireframe();
 		//ofSetColor(ofColor::red);
@@ -342,25 +243,25 @@ namespace ami
 			glEnd();
 		}
 		
-		//ofSetLineWidth(5.0f);
-		//ofSetColor(ofColor::red);
-		//for (auto & con = m_con.begin(); con != m_con.end(); con++)
-		//{
-		//	glm::vec3 & point0 = m_mesh.getVertices()[con->first];
+		ofSetLineWidth(2.0f);
+		ofSetColor(ofColor::red);
+		for (auto & con = m_con.begin(); con != m_con.end(); con++)
+		{
+			glm::vec3 & point0 = m_mesh.getVertices()[con->first];
 
-		//	for (auto & index : con->second)
-		//	{
-		//		glm::vec3 & point1 = m_mesh.getVertices()[index.first];
+			for (auto & index : con->second)
+			{
+				glm::vec3 & point1 = m_mesh.getVertices()[index.first];
 
-		//		glm::vec3 start = point0;
-		//		glm::vec3 end = start + (point1 - point0).getNormalized()*m_pointDistance;
+				glm::vec3 start = point0;
+				glm::vec3 end = point0 + glm::normalize(point1 - point0) * index.second; // show the correct distance
 
-		//		glBegin(GL_LINES);
-		//		glVertex3f(start.x, start.y, start.z);
-		//		glVertex3f(end.x, end.y, end.z);
-		//		glEnd();
-		//	}
-		//}
+				glBegin(GL_LINES);
+				glVertex3f(start.x, start.y, start.z);
+				glVertex3f(end.x, end.y, end.z);
+				glEnd();
+			}
+		}
 
 		ofPopStyle();
 	}
