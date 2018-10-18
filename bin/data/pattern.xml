@@ -1,14 +1,14 @@
 <Pattern>
 	<Round>
-		<Operation Count="6">MR</Operation>
+		<Operation count="6">MR</Operation>
 		<!--
-		<Operation Count="1">SC</Operation>
-		<Operation Count="1">INC</Operation>
-		<Operation Count="1">SC</Operation>
-		<Operation Count="1">INC</Operation>
-		<Operation Count="1">SC</Operation>
-		<Operation Count="1">INC</Operation>
+		<Operation count="1">SC</Operation>
+		<Operation count="1">INC</Operation>
+		<Operation count="1">SC</Operation>
+		<Operation count="1">INC</Operation>
+		<Operation count="1">SC</Operation>
+		<Operation count="1">INC</Operation>
 		-->
-		<Operation Count="36">SC</Operation>
+		<Operation count="36">SC</Operation>
 	</Round>
 </Pattern>

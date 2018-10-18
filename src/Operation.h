@@ -1,13 +1,14 @@
 #pragma once
 
 #include "ofLog.h"
+#include <map>
 
 namespace ami
 {
 	class Operation
 	{
 	public:
-		enum Type {
+		enum class Type {
 			// loop
 			LP,
 			// crochet
@@ -21,56 +22,76 @@ namespace ami
 			// magic ring
 			MR,
 			// finish off
-			FO
+			FO,
+			// nothing
+			NONE
 		};
 
 		typedef std::vector<Operation::Type> Operations;
 
 		static Operation::Type getOperation(const std::string & op)
 		{
-			if (op == "LP") return LP;
-			//if (op == "CH") return CH;
-			if (op == "SC") return SC;
-			if (op == "INC") return INC;
-			if (op == "DEC") return DEC;
-			if (op == "MR") return MR;
-			if (op == "FO") return FO;
+			const static std::map<std::string, Type> m_operations =
+			{
+				{ "LP", Type::LP },
+				{ "SC", Type::SC },
+				{ "INC", Type::INC },
+				{ "DEC", Type::DEC },
+				{ "MR", Type::MR },
+				{ "FO", Type::FO }
+			};
+
+			auto & op_it = m_operations.find(op);
+			if (op_it != m_operations.end())
+			{
+				return op_it->second;
+			}
+
+			ofLogWarning("Operation") << "getType: String " << op << " not found";
+			return Type::NONE;
 		}
 		
 		static std::string getString(Operation::Type op)
 		{
-			switch (op)
+			const static std::map<Type, std::string> m_operations =
 			{
-				case LP: return "LP"; break;
-				//case CH: return "CH"; break;
-				case SC: return "SC"; break;
-				case INC: return "INC"; break;
-				case DEC: return "DEC"; break;
-				case MR: return "MR"; break;
-				case FO: return "FO"; break;
-				default: ofLogWarning("Operation") << "getString: Type not found";
+				{ Type::LP, "LP" },
+				{ Type::SC, "SC" },
+				{ Type::INC, "INC" },
+				{ Type::DEC, "DEC" },
+				{ Type::MR, "MR" },
+				{ Type::FO, "FO" }
+			};
+
+			auto & op_it = m_operations.find(op);
+			if (op_it != m_operations.end())
+			{
+				return op_it->second;
 			}
+
+			ofLogWarning("Operation") << "getString: Type not found";
+			return "NONE";
 		}
 
 		static unsigned int getRequiredStitches(Operation::Type op)
 		{
 			switch (op)
 			{
-			case LP: return 0; break;
-			//case CH: return "1"; break;
-			case SC: return 1; break;
-			case INC: return 0; break;
-			case DEC: return 2; break;
-			//case MR: return 1; break;
-			default: ofLogWarning("Operation") << "RequiredStitches: Type not found";
+				case Type::LP: return 0; break;
+				//case Type::CH: return "1"; break;
+				case Type::SC: return 1; break;
+				case Type::INC: return 0; break;
+				case Type::DEC: return 2; break;
+				//case MR: return 1; break;
+				default: ofLogWarning("Operation") << "RequiredStitches: Type not found";
 			}
 		}
 
 		static Operations parseOperation(Operation::Type op, unsigned int count)
 		{
-			if (op == MR)
+			if (op == Type::MR)
 			{
-				return Operations(count, INC); // magic ring consists on "count inc"
+				return Operations(count, Type::INC); // magic ring consists on "count inc"
 			}
 			// for the rest its simply the operation n times
 			else

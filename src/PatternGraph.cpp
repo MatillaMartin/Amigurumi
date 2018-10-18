@@ -28,8 +28,16 @@ PatternGraph::PatternGraph(const PatternDef & pattern)
 	}
 }
 
+ami::PatternGraph::PatternGraph(const Graph & graph) :
+	m_graph(graph)
+{
+}
+
 void PatternGraph::addOperation(Operation::Type type)
 {
+	// return number of nodes used
+	unsigned int nodesUsed = 0;
+
 	// Update next as necessary
 
 	// Operations that do NOT add nodes
@@ -74,6 +82,7 @@ void PatternGraph::addOperation(Operation::Type type)
 			node.under = node.id;
 			node.last = node.id;
 			node.next = node.id;
+
 			break;
 		}
 
@@ -90,6 +99,7 @@ void PatternGraph::addOperation(Operation::Type type)
 			m_graph.addFace(node.id, node.last, node_it.last().under().id);
 			m_graph.addFace(node.id, node_it.last().under().id, node.under);
 
+			m_graph.useNodes(1); // notify Graph we have used up 1 node
 			break;
 		}
 		case Operation::Type::INC:
@@ -121,6 +131,7 @@ void PatternGraph::addOperation(Operation::Type type)
 			m_graph.addFace(node.id, node_it.last().under().id, node_it.under().last().id);
 			m_graph.addFace(node.id, node_it.under().last().id, node.under);
 
+			m_graph.useNodes(2); // notify Graph we have used up 2 nodes
 			break;
 		}
 

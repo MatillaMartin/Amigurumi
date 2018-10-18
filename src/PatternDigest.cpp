@@ -4,10 +4,11 @@ namespace ami
 {
 	vector<PatternDef> PatternDigest::digest(const string & file)
 	{
+		const static string tagAmi = "Amigurumi";
 		const static string tagPattern = "Pattern";
 		const static string tagRound = "Round";
 		const static string tagOperation = "Operation";
-		const static string attCount = "Count";
+		const static string attCount = "count";
 
 		vector<PatternDef> patterns;
 
@@ -17,6 +18,7 @@ namespace ami
 
 			data.load(file);
 
+			data.pushTag(tagAmi);
 			// for each pattern
 			for (unsigned int patternIndex = 0; patternIndex < data.getNumTags(tagPattern); patternIndex++)
 			{
@@ -50,12 +52,13 @@ namespace ami
 
 					def.addRound(op);
 
-					data.popTag();
+					data.popTag(); // round
 				}
 
 				patterns.push_back(def);
-				data.popTag();
+				data.popTag();  // pattern
 			}
+			data.popTag(); // ami
 		}
 		else
 		{

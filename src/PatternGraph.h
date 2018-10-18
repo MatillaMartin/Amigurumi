@@ -94,6 +94,14 @@ namespace ami
 				return NodeIterator(m_nodes, node.id);
 			}
 
+			void useNodes(unsigned int n)
+			{
+				for (unsigned int i = 0; i < n; i++)
+				{
+					m_outline.pop_front();
+				}
+			}
+
 			void addEdge(ofIndexType from, ofIndexType to, float distance)
 			{
 				Edge edge;
@@ -120,12 +128,12 @@ namespace ami
 
 			NodeIterator front()
 			{
-				return NodeIterator(m_nodes, m_nodes.front().id);
+				return NodeIterator(m_nodes, m_outline.front().id);
 			}
 
 			NodeIterator back()
 			{
-				return NodeIterator(m_nodes, m_nodes.back().id);
+				return NodeIterator(m_nodes, m_outline.back().id);
 			}
 
 			const std::vector<Node> & getNodes() const {
@@ -142,10 +150,13 @@ namespace ami
 			std::vector<Node> m_nodes;
 			std::vector<Edge> m_edges;
 			std::vector<Face> m_faces;
+			std::deque<NodeIterator> m_outline;
 		};
 
 
 		PatternGraph(const PatternDef & pattern);
+		PatternGraph(const Graph & graph);
+
 		const std::vector<Node> & getNodes() const {
 			return m_graph.getNodes();
 		}
@@ -154,6 +165,11 @@ namespace ami
 		}
 		const std::vector<Face> & getFaces() const {
 			return m_graph.getFaces();
+		}
+
+		PatternGraph join(const PatternGraph & graph, std::vector<std::pair<Node, Node>> & joints)
+		{
+			
 		}
 
 	private:
