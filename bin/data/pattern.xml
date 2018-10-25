@@ -1,14 +1,16 @@
-<Pattern>
-	<Round>
-		<Operation count="6">MR</Operation>
-		<!--
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		-->
-		<Operation count="36">SC</Operation>
-	</Round>
-</Pattern>
+<Amigurumi>
+	<Pattern>
+		<Round>
+			<Operation count="6">MR</Operation>
+			<!--
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			-->
+			<Operation count="36">SC</Operation>
+		</Round>
+	</Pattern>
+<Amigurumi>

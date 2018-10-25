@@ -1,162 +1,164 @@
-<Pattern>
-	<!--Round 1-->
-	<Round>
-		<Operation count="4">MR</Operation>
-	</Round>
-	<!--Round 2-->
-	<Round>
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-	</Round>
-	<!--Round 3-->
-	<Round>
-		<Operation count="8">SC</Operation>
-	</Round>
-	<!--Round 4-->
-	<Round>
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="3">SC</Operation>
-		
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="3">SC</Operation>
-	</Round>
-	<!--Round 5-->
-	<Round>
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="4">SC</Operation>
-		
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="4">SC</Operation>
-	</Round>
-	<!--Round 6-->
-	<Round>
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="3">SC</Operation>
-		
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="3">SC</Operation>
-		
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="3">SC</Operation>
-	</Round>
-	<!--Round 7-->
-	<Round>
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="4">SC</Operation>
-		
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="4">SC</Operation>
-		
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="4">SC</Operation>
-	</Round>
-	<!--Round 8-->
-	<Round>
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="5">SC</Operation>
-		
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="5">SC</Operation>
-		
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="5">SC</Operation>
-	</Round>
-	<!--Round 9-->
-	<Round>
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="6">SC</Operation>
-		
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="6">SC</Operation>
-		
-		<Operation count="1">SC</Operation>
-		<Operation count="1">INC</Operation>
-		<Operation count="6">SC</Operation>
-	</Round>
-	<!--Round 10-->
-	<Round>
-		<Operation count="24">SC</Operation>
-	</Round>
-	<!--Round 11-->
-	<Round>
-		<Operation count="24">SC</Operation>
-	</Round>
-	<!--Round 12-->
-	<Round>
-		<Operation count="1">DEC</Operation>
-		<Operation count="4">SC</Operation>
-		
-		<Operation count="1">DEC</Operation>
-		<Operation count="4">SC</Operation>
-		
-		<Operation count="1">DEC</Operation>
-		<Operation count="4">SC</Operation>
-	</Round>
-	<!--Round 13-->
-	<Round>
-		<Operation count="1">DEC</Operation>
-		<Operation count="5">SC</Operation>
-		
-		<Operation count="1">DEC</Operation>
-		<Operation count="5">SC</Operation>
-		
-		<Operation count="1">DEC</Operation>
-		<Operation count="5">SC</Operation>
-	</Round>
-	<!--Round 14-->
-	<Round>
-		<Operation count="1">DEC</Operation>
-		<Operation count="4">SC</Operation>
-		
-		<Operation count="1">DEC</Operation>
-		<Operation count="4">SC</Operation>
-		
-		<Operation count="1">DEC</Operation>
-		<Operation count="4">SC</Operation>
-	</Round>
-	<!--Round 15-->
-	<Round>
-		<Operation count="1">DEC</Operation>
-		<Operation count="1">SC</Operation>
-		
-		<Operation count="1">DEC</Operation>
-		<Operation count="1">SC</Operation>
-		
-		<Operation count="1">DEC</Operation>
-		<Operation count="1">SC</Operation>
-		
-		<Operation count="1">DEC</Operation>
-		<Operation count="1">SC</Operation>
-		
-		<Operation count="1">DEC</Operation>
-		<Operation count="1">SC</Operation>
-	</Round>
-	<!--Round 16-->
-	<Round>
-		<Operation count="5">DEC</Operation>
-	</Round>
-</Pattern>
+<Amigurumi>
+	<Pattern>
+		<!--Round 1-->
+		<Round>
+			<Operation count="4">MR</Operation>
+		</Round>
+		<!--Round 2-->
+		<Round>
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+		</Round>
+		<!--Round 3-->
+		<Round>
+			<Operation count="8">SC</Operation>
+		</Round>
+		<!--Round 4-->
+		<Round>
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="3">SC</Operation>
+			
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="3">SC</Operation>
+		</Round>
+		<!--Round 5-->
+		<Round>
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="4">SC</Operation>
+			
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="4">SC</Operation>
+		</Round>
+		<!--Round 6-->
+		<Round>
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="3">SC</Operation>
+			
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="3">SC</Operation>
+			
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="3">SC</Operation>
+		</Round>
+		<!--Round 7-->
+		<Round>
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="4">SC</Operation>
+			
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="4">SC</Operation>
+			
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="4">SC</Operation>
+		</Round>
+		<!--Round 8-->
+		<Round>
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="5">SC</Operation>
+			
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="5">SC</Operation>
+			
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="5">SC</Operation>
+		</Round>
+		<!--Round 9-->
+		<Round>
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="6">SC</Operation>
+			
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="6">SC</Operation>
+			
+			<Operation count="1">SC</Operation>
+			<Operation count="1">INC</Operation>
+			<Operation count="6">SC</Operation>
+		</Round>
+		<!--Round 10-->
+		<Round>
+			<Operation count="24">SC</Operation>
+		</Round>
+		<!--Round 11-->
+		<Round>
+			<Operation count="24">SC</Operation>
+		</Round>
+		<!--Round 12-->
+		<Round>
+			<Operation count="1">DEC</Operation>
+			<Operation count="4">SC</Operation>
+			
+			<Operation count="1">DEC</Operation>
+			<Operation count="4">SC</Operation>
+			
+			<Operation count="1">DEC</Operation>
+			<Operation count="4">SC</Operation>
+		</Round>
+		<!--Round 13-->
+		<Round>
+			<Operation count="1">DEC</Operation>
+			<Operation count="5">SC</Operation>
+			
+			<Operation count="1">DEC</Operation>
+			<Operation count="5">SC</Operation>
+			
+			<Operation count="1">DEC</Operation>
+			<Operation count="5">SC</Operation>
+		</Round>
+		<!--Round 14-->
+		<Round>
+			<Operation count="1">DEC</Operation>
+			<Operation count="4">SC</Operation>
+			
+			<Operation count="1">DEC</Operation>
+			<Operation count="4">SC</Operation>
+			
+			<Operation count="1">DEC</Operation>
+			<Operation count="4">SC</Operation>
+		</Round>
+		<!--Round 15-->
+		<Round>
+			<Operation count="1">DEC</Operation>
+			<Operation count="1">SC</Operation>
+			
+			<Operation count="1">DEC</Operation>
+			<Operation count="1">SC</Operation>
+			
+			<Operation count="1">DEC</Operation>
+			<Operation count="1">SC</Operation>
+			
+			<Operation count="1">DEC</Operation>
+			<Operation count="1">SC</Operation>
+			
+			<Operation count="1">DEC</Operation>
+			<Operation count="1">SC</Operation>
+		</Round>
+		<!--Round 16-->
+		<Round>
+			<Operation count="5">DEC</Operation>
+		</Round>
+	</Pattern>
+</Amigurumi>
