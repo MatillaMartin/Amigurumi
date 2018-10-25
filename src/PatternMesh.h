@@ -43,6 +43,8 @@ namespace ami
 
 		std::vector<glm::vec3> m_oldVec;
 
+		std::vector<ofIndexType> m_outline;
+
 		unsigned int m_roundNum;
 		float m_pointDistance;
 		float m_minTension;

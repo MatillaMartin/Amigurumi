@@ -99,7 +99,10 @@ void PatternGraph::addOperation(Operation::Type type)
 			m_graph.addFace(node.id, node.last, node_it.last().under().id);
 			m_graph.addFace(node.id, node_it.last().under().id, node.under);
 
-			m_graph.useNodes(1); // notify Graph we have used up 1 node
+			if (!m_graph.popOutline()) // we have used up 1 nodes from the outline
+			{
+				throw std::invalid_argument("Not enough points to apply SC");
+			}
 			break;
 		}
 		case Operation::Type::INC:
@@ -131,7 +134,11 @@ void PatternGraph::addOperation(Operation::Type type)
 			m_graph.addFace(node.id, node_it.last().under().id, node_it.under().last().id);
 			m_graph.addFace(node.id, node_it.under().last().id, node.under);
 
-			m_graph.useNodes(2); // notify Graph we have used up 2 nodes
+			if (!m_graph.popOutline(2)) // we have used up 2 nodes from the outline
+			{
+				throw std::invalid_argument("Not enough points to apply DEC");
+			}
+
 			break;
 		}
 
