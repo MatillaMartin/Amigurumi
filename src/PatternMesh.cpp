@@ -238,16 +238,16 @@ namespace ami
 		//}
 
 
-		//ofSetColor(ofColor::green);
-		//glBegin(GL_LINES);
-		//for (auto & tension : m_expansionForce)
-		//{
-		//	glm::vec3 start = m_mesh.getVertex(tension.first);
-		//	glm::vec3 end = start + glm::normalize(tension.second);
-		//	glVertex3f(start.x, start.y, start.z);
-		//	glVertex3f(end.x, end.y, end.z);
-		//}
-		//glEnd();
+		ofSetColor(ofColor::green);
+		glBegin(GL_LINES);
+		for (auto & tension : m_expansionForce)
+		{
+			glm::vec3 start = m_mesh.getVertex(tension.first);
+			glm::vec3 end = start + glm::normalize(tension.second);
+			glVertex3f(start.x, start.y, start.z);
+			glVertex3f(end.x, end.y, end.z);
+		}
+		glEnd();
 		
 		//ofSetLineWidth(2.0f);
 		//ofSetColor(ofColor::red);

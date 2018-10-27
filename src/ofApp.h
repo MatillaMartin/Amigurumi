@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 
-#include "PatternDigest.h"
+#include "Amigurumi.h"
 #include "PatternView.h"
 
 using namespace ami;
@@ -37,7 +37,7 @@ public:
 	std::string m_filepath;
 	ofEasyCam m_cam;
 	PatternView m_view;
-	std::vector<PatternDef> m_patterns;
+	PatternGraph m_ami;
 
 	float m_leftOverTime;
 	float m_fixedUpdateMillis;

@@ -28,11 +28,9 @@ namespace ami
 		m_mesh.update(deltaTime);
 	}
 
-	void PatternView::setPattern(const PatternDef & pattern, bool bStep)
+	void PatternView::setPattern(const PatternGraph & graph, bool bStep)
 	{
 		m_sbs.bStep = bStep;
-
-		PatternGraph graph(pattern);
 
 		m_mesh = PatternMesh(graph);
 

@@ -200,7 +200,7 @@
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="src\PatternDigest.cpp" />
+    <ClCompile Include="src\Amigurumi.cpp" />
     <ClCompile Include="src\PatternGraph.cpp" />
     <ClCompile Include="src\PatternMesh.cpp" />
     <ClCompile Include="src\PatternView.cpp" />
@@ -223,7 +223,7 @@
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Operation.h" />
     <ClInclude Include="src\PatternDef.h" />
-    <ClInclude Include="src\PatternDigest.h" />
+    <ClInclude Include="src\Amigurumi.h" />
     <ClInclude Include="src\PatternMesh.h" />
     <ClInclude Include="src\PatternView.h" />
     <ClInclude Include="src\PatternGraph.h" />

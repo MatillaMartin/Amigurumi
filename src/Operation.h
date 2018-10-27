@@ -23,6 +23,8 @@ namespace ami
 			MR,
 			// finish off
 			FO,
+			// slip stitch
+			SLST,
 			// nothing
 			NONE
 		};
@@ -38,6 +40,7 @@ namespace ami
 				{ "INC", Type::INC },
 				{ "DEC", Type::DEC },
 				{ "MR", Type::MR },
+				{ "SLST", Type::SLST },
 				{ "FO", Type::FO }
 			};
 
@@ -60,6 +63,7 @@ namespace ami
 				{ Type::INC, "INC" },
 				{ Type::DEC, "DEC" },
 				{ Type::MR, "MR" },
+				{ Type::SLST, "SLST" },
 				{ Type::FO, "FO" }
 			};
 
@@ -71,20 +75,6 @@ namespace ami
 
 			ofLogWarning("Operation") << "getString: Type not found";
 			return "NONE";
-		}
-
-		static unsigned int getRequiredStitches(Operation::Type op)
-		{
-			switch (op)
-			{
-				case Type::LP: return 0; break;
-				//case Type::CH: return "1"; break;
-				case Type::SC: return 1; break;
-				case Type::INC: return 0; break;
-				case Type::DEC: return 2; break;
-				//case MR: return 1; break;
-				default: ofLogWarning("Operation") << "RequiredStitches: Type not found";
-			}
 		}
 
 		static Operations parseOperation(Operation::Type op, unsigned int count)

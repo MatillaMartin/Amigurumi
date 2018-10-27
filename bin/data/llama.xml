@@ -1,152 +1,160 @@
 <Amigurumi>
-	<Pattern id=0>
-		<Round>
-			<Operation count="6">MR</Operation>
-		</Round>
-		<Round>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-		</Round>
-		<Round>
-			<Operation count="9">SC</Operation>
-		</Round>
-		<Round>
-			<Operation count="2">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="2">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="2">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-		</Round>
-		<Round>
-			<Operation count="12">SC</Operation>
-		</Round>
-		<Round>
-			<Operation count="3">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="3">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="3">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-		</Round>
-		<Round>
-			<Operation count="15">SC</Operation>
-		</Round>
-		<Round>
-			<Operation count="15">SC</Operation>
-		</Round>
+	<Command type="Pattern">
+		<Pattern id=0>
 			<Round>
-			<Operation count="4">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="4">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="4">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-		</Round>
-		<Round>
-			<Operation count="18">SC</Operation>
-		</Round>
-		<Round>
-			<Operation count="18">SC</Operation>
-		</Round>
-		<Round>
-			<Operation count="18">SC</Operation>
-		</Round>
-	</Pattern>
-	<Pattern id=1>
-		<Round>
-			<Operation count="6">MR</Operation>
-		</Round>
-		<Round>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-		</Round>
-		<Round>
-			<Operation count="9">SC</Operation>
-		</Round>
-		<Round>
-			<Operation count="2">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="2">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="2">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-		</Round>
-		<Round>
-			<Operation count="12">SC</Operation>
-		</Round>
-		<Round>
-			<Operation count="3">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="3">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="3">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-		</Round>
-		<Round>
-			<Operation count="15">SC</Operation>
-		</Round>
-		<Round>
-			<Operation count="15">SC</Operation>
-		</Round>
-		<Round>
-			<Operation count="4">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="4">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-			<Operation count="4">SC</Operation>
-			<Operation count="1">SC</Operation>
-			<Operation count="1">INC</Operation>
-		</Round>
-		<Round>
-			<Operation count="18">SC</Operation>
-		</Round>
-		<Round>
-			<Operation count="18">SC</Operation>
-		</Round>
-		<Round>
-			<Operation count="18">SC</Operation>
-		</Round>
-	</Pattern>
+				<Operation type="MR" count="6"/>
+			</Round>
+			<Round>
+				<Operation type="SC" />
+				<Operation type="SC" />
+				<Operation type="INC" />
+				<Operation type="SC" />
+				<Operation type="SC" />
+				<Operation type="INC" />
+				<Operation type="SC" />
+				<Operation type="SC" />
+				<Operation type="INC"/>
+			</Round>
+			<Round>
+				<Operation type="SC" count="9"/>
+			</Round>
+			<Round>
+				<Operation type="SC" count="2"/>
+				<Operation type="SC"/>
+				<Operation type="INC"/>
+				<Operation type="SC" count="2"/>
+				<Operation type="SC"/>
+				<Operation type="INC"/>
+				<Operation type="SC" count="2"/>
+				<Operation type="SC"/>
+				<Operation type="INC"/>
+			</Round>
+			<Round>
+				<Operation type="SC" count="12"/>
+			</Round>
+			<Round>
+				<Operation type="SC" count="3"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+				<Operation type="SC" count="3"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+				<Operation type="SC" count="3"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+			</Round>
+			<Round>
+				<Operation type="SC" count="15"/>
+			</Round>
+			<Round>
+				<Operation type="SC" count="15"/>
+			</Round>
+				<Round>
+				<Operation type="SC" count="4"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+				<Operation type="SC" count="4"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+				<Operation type="SC" count="4"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+			</Round>
+			<Round>
+				<Operation type="SC" count="18"/>
+			</Round>
+			<Round>
+				<Operation type="SC" count="18"/>
+			</Round>
+			<Round>
+				<Operation type="SC" count="18"/>
+			</Round>
+		</Pattern>
+	</Command>
+	<Command type="Pattern">
+		<Pattern id=1>
+			<Round>
+				<Operation type="MR" count="6"/>
+			</Round>
+			<Round>
+				<Operation type="SC" />
+				<Operation type="SC" />
+				<Operation type="INC" />
+				<Operation type="SC" />
+				<Operation type="SC" />
+				<Operation type="INC" />
+				<Operation type="SC" />
+				<Operation type="SC" />
+				<Operation type="INC" />
+			</Round>
+			<Round>
+				<Operation type="SC" count="9"/>
+			</Round>
+			<Round>
+				<Operation type="SC" count="2"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+				<Operation type="SC" count="2"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+				<Operation type="SC" count="2"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+			</Round>
+			<Round>
+				<Operation type="SC" count="12"/>
+			</Round>
+			<Round>
+				<Operation type="SC" count="3"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+				<Operation type="SC" count="3"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+				<Operation type="SC" count="3"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+			</Round>
+			<Round>
+				<Operation type="SC" count="15"/>
+			</Round>
+			<Round>
+				<Operation type="SC" count="15"/>
+			</Round>
+			<Round>
+				<Operation type="SC" count="4"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+				<Operation type="SC" count="4"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+				<Operation type="SC" count="4"/>
+				<Operation type="SC" />
+				<Operation type="INC" />
+			</Round>
+			<Round>
+				<Operation type="SC" count="18"/>
+			</Round>
+			<Round>
+				<Operation type="SC" count="18"/>
+			</Round>
+			<Round>
+				<Operation type="SC" count="18"/>
+			</Round>
+		</Pattern>
+	</Command>
+	<Command type="Join">
+		<Join pattern="0" with="1" make="2"></Join>
+	</Command>
+	
+	<!--<Command type="Pattern">
 	<Pattern id=2>
-		<Join pattern=0 with=1>
-			<Node node=1 with=1>
-			<Node node=2 with=2>
-			<Node node=3 with=3>
-		</Join>
 		<Round>
-			<Operation count="12">SC</Operation>
+			<Operation type="SLST" node="1" with="1"/>
+			<Operation type="SLST" node="2" with="2"/>
+			<Operation type="SLST" node="3" with="3"/>
+			<Operation type="SC" count="3"/>
 		</Round>
 	</Pattern>
+	</Command>-->
 </Amigurumi>

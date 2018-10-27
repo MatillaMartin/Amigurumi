@@ -10,7 +10,7 @@ namespace ami
 	public:
 		PatternView();
 
-		void setPattern(const PatternDef & pattern, bool bStep = false);
+		void setPattern(const PatternGraph & pattern, bool bStep = false);
 
 		void render();
 

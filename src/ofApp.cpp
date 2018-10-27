@@ -21,12 +21,12 @@ void ofApp::setup(){
 	m_cam.setNearClip(1.0f);
 	m_cam.setFarClip(1000.0f);
 
-	m_filepath = "whale.xml";
+	m_filepath = "llama.xml";
 
 	try
 	{
-		m_patterns = PatternDigest::digest(m_filepath);
-		m_view.setPattern(m_patterns[0], m_settings.step);
+		m_ami = Amigurumi(m_filepath).getPattern();
+		m_view.setPattern(m_ami, m_settings.step);
 	}
 	catch (std::invalid_argument & e)
 	{
@@ -94,8 +94,7 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key) {
 	if (key == ' ')
 	{
-		m_patterns = PatternDigest::digest(m_filepath);
-		m_view.setPattern(m_patterns[0], m_settings.step);
+		m_view.setPattern(m_ami, m_settings.step);
 	}
 	if (key == 'l' || key == 'L')
 	{
@@ -105,12 +104,13 @@ void ofApp::keyPressed(int key) {
 			m_filepath = res.filePath;
 			try
 			{
-				m_patterns = PatternDigest::digest(m_filepath);
-				m_view.setPattern(m_patterns[0], m_settings.step);
+				m_ami = Amigurumi(m_filepath).getPattern();
+				m_view.setPattern(m_ami, m_settings.step);
 			}
 			catch (std::invalid_argument & e)
 			{
 				ofLogError("ofApp") << "Pattern graph failed: " << e.what();
+				ofExit();
 			}
 		}
 	}

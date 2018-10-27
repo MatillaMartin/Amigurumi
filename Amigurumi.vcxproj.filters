@@ -43,9 +43,6 @@
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClCompile>
-    <ClCompile Include="src\PatternDigest.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\PatternMesh.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -59,6 +56,9 @@
       <Filter>addons\ofxGui</Filter>
     </ClCompile>
     <ClCompile Include="src\PatternGraph.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Amigurumi.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -125,9 +125,6 @@
     <ClInclude Include="src\PatternDef.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\PatternDigest.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\PatternMesh.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -147,6 +144,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Operation.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Amigurumi.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
