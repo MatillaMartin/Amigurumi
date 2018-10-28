@@ -2,17 +2,18 @@
 	<Command type="Pattern">
 		<Pattern id=0>
 			<Round>
+				<Operation type="LP"/>
 				<Operation type="MR" count="6"/>
 			</Round>
 			<Round>
-				<Operation type="SC" />
-				<Operation type="SC" />
-				<Operation type="INC" />
-				<Operation type="SC" />
-				<Operation type="SC" />
-				<Operation type="INC" />
-				<Operation type="SC" />
-				<Operation type="SC" />
+				<Operation type="SC"/>
+				<Operation type="SC"/>
+				<Operation type="INC"/>
+				<Operation type="SC"/>
+				<Operation type="SC"/>
+				<Operation type="INC"/>
+				<Operation type="SC"/>
+				<Operation type="SC"/>
 				<Operation type="INC"/>
 			</Round>
 			<Round>
@@ -34,14 +35,14 @@
 			</Round>
 			<Round>
 				<Operation type="SC" count="3"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 				<Operation type="SC" count="3"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 				<Operation type="SC" count="3"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 			</Round>
 			<Round>
 				<Operation type="SC" count="15"/>
@@ -51,14 +52,14 @@
 			</Round>
 				<Round>
 				<Operation type="SC" count="4"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 				<Operation type="SC" count="4"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 				<Operation type="SC" count="4"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 			</Round>
 			<Round>
 				<Operation type="SC" count="18"/>
@@ -74,46 +75,47 @@
 	<Command type="Pattern">
 		<Pattern id=1>
 			<Round>
+				<Operation type="LP"/>
 				<Operation type="MR" count="6"/>
 			</Round>
 			<Round>
-				<Operation type="SC" />
-				<Operation type="SC" />
-				<Operation type="INC" />
-				<Operation type="SC" />
-				<Operation type="SC" />
-				<Operation type="INC" />
-				<Operation type="SC" />
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="SC"/>
+				<Operation type="INC"/>
+				<Operation type="SC"/>
+				<Operation type="SC"/>
+				<Operation type="INC"/>
+				<Operation type="SC"/>
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 			</Round>
 			<Round>
 				<Operation type="SC" count="9"/>
 			</Round>
 			<Round>
 				<Operation type="SC" count="2"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 				<Operation type="SC" count="2"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 				<Operation type="SC" count="2"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 			</Round>
 			<Round>
 				<Operation type="SC" count="12"/>
 			</Round>
 			<Round>
 				<Operation type="SC" count="3"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 				<Operation type="SC" count="3"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 				<Operation type="SC" count="3"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 			</Round>
 			<Round>
 				<Operation type="SC" count="15"/>
@@ -123,14 +125,14 @@
 			</Round>
 			<Round>
 				<Operation type="SC" count="4"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 				<Operation type="SC" count="4"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 				<Operation type="SC" count="4"/>
-				<Operation type="SC" />
-				<Operation type="INC" />
+				<Operation type="SC"/>
+				<Operation type="INC"/>
 			</Round>
 			<Round>
 				<Operation type="SC" count="18"/>
@@ -147,14 +149,14 @@
 		<Join pattern="0" with="1" make="2"></Join>
 	</Command>
 	
-	<!--<Command type="Pattern">
+	<Command type="Pattern">
 	<Pattern id=2>
 		<Round>
-			<Operation type="SLST" node="1" with="1"/>
-			<Operation type="SLST" node="2" with="2"/>
-			<Operation type="SLST" node="3" with="3"/>
+			<Operation type="SLST" node="330"/>
+			<Operation type="SLST" node="331"/>
+			<Operation type="SLST" node="332"/>
 			<Operation type="SC" count="3"/>
 		</Round>
 	</Pattern>
-	</Command>-->
+	</Command>
 </Amigurumi>

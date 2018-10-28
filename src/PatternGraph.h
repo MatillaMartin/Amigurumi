@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <list>
+#include <deque>
 #include "ofMath.h"
 #include "PatternDef.h"
 
@@ -100,16 +101,34 @@ namespace ami
 			return m_outline;
 		}
 
+		// visitor pattern
+		void apply(const Operation::Chain & op);
+		void apply(const Operation::Decrease & op);
+		void apply(const Operation::FinishOff & op);
+		void apply(const Operation::Increase & op);
+		void apply(const Operation::Loop & op);
+		void apply(const Operation::MagicRing & op);
+		void apply(const Operation::SingleCrochet & op);
+		void apply(const Operation::SlipStitch & op);
+		void apply(const Operation::Operation & op);
 
 	private:
-		void addOperation(Operation::Type type);
 
-		NodeIterator addNode()
+		NodeIterator addNode(const Data & data)
 		{
 			Node node;
 			node.id = m_nodes.size();
-			m_nodes.push_back(node);
+			node.data = data;
+			node.next = 0; // there is no next yet!
 			NodeIterator it(m_nodes, node.id);
+			m_nodes.push_back(node);
+
+			if (node.id > 0)
+			{
+				it.node().last = node.id - 1; 
+				it.last().node().next = node.id; // asign ourselves as our last's next
+			}
+
 			addOutline(it);
 			return it;
 		}
@@ -130,6 +149,7 @@ namespace ami
 			{
 				m_outline.pop_front();
 			}
+			return true;
 		}
 
 		void addEdge(ofIndexType from, ofIndexType to, float distance)
@@ -164,6 +184,11 @@ namespace ami
 		NodeIterator back()
 		{
 			return NodeIterator(m_nodes, m_outline.back().id);
+		}
+
+		NodeIterator get(ofIndexType id)
+		{
+			return NodeIterator(m_nodes, id);
 		}
 
 	private:

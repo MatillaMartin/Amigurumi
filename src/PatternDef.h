@@ -14,9 +14,6 @@ namespace ami
 
 		PatternDef()
 		{
-			// all PatternDefinitions contain a Loop to start with... then MR or other stitches
-			std::vector<Operation::Type> loop = { Operation::Type::LP };
-			this->addRound(loop);
 		}
 
 		const std::vector<Round> & getRounds() const {
@@ -27,9 +24,9 @@ namespace ami
 			return m_rounds;
 		}
 
-		void addRound(Operation::Operations & round)
+		void addRound(Operation::Operations && round)
 		{
-			m_rounds.push_back(round);
+			m_rounds.push_back(std::move(round));
 		}
 
 	private:

@@ -9,8 +9,6 @@ namespace ami
 		const static std::string tagAmi = "Amigurumi";
 		const static std::string tagCommand = "Command";
 
-		vector<PatternDef> patterns;
-
 		if (ofFile::doesFileExist(file))
 		{
 			ofxXmlSettings data;
@@ -80,15 +78,15 @@ namespace ami
 			// for each operation in the row
 			for (unsigned int operationIndex = 0; operationIndex < data.getNumTags(tagOperation); operationIndex++)
 			{
-				std::string operation = data.getAttribute(tagOperation, "type", "", operationIndex);
+				std::string type = data.getAttribute(tagOperation, "type", "", operationIndex);
 				unsigned int count = data.getAttribute(tagOperation, "count", 1, operationIndex);
-				if (operation != "")
+				if (type != "")
 				{
-					// get operation as type
-					Operation::Type type = Operation::getOperation(operation);
+					// get operation
+					std::unique_ptr<Operation::Operation> operation = Operation::getOperation(type, data);
 					// parse for special operations (MR and others)
-					vector<Operation::Type> operations = Operation::parseOperation(type, count);
-					op.insert(op.end(), operations.begin(), operations.end());
+					Operation::Operations operations = Operation::parseOperation(*operation, count);
+					op.insert(op.end(), std::make_move_iterator(operations.begin()), std::make_move_iterator(operations.end()));
 				}
 				else
 				{
@@ -96,7 +94,7 @@ namespace ami
 				}
 			}
 
-			def.addRound(op);
+			def.addRound(std::move(op));
 
 			data.popTag(); // round
 		}

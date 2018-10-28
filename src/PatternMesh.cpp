@@ -28,6 +28,8 @@ namespace ami
 			m_mesh.addVertex(vertex);
 			m_oldVec.push_back(vertex);
 
+			m_properties[node.id] = { false, node.id, node.data.op };
+
 			nodeIndex++;
 		}
 
@@ -249,45 +251,53 @@ namespace ami
 		}
 		glEnd();
 		
-		//ofSetLineWidth(2.0f);
-		//ofSetColor(ofColor::red);
-		//for (auto & con = m_con.begin(); con != m_con.end(); con++)
-		//{
-		//	glm::vec3 & point0 = m_mesh.getVertices()[con->first];
-
-		//	for (auto & index : con->second)
-		//	{
-		//		glm::vec3 & point1 = m_mesh.getVertices()[index.first];
-
-		//		glm::vec3 start = point0;
-		//		glm::vec3 end = point0 + glm::normalize(point1 - point0) * index.second; // show the correct distance
-
-		//		glBegin(GL_LINES);
-		//		glVertex3f(start.x, start.y, start.z);
-		//		glVertex3f(end.x, end.y, end.z);
-		//		glEnd();
-		//	}
-		//}
-
-		ofSetColor(ofColor::blue);
-		glBegin(GL_LINES);
-		for (auto it = m_outline.begin(); it != m_outline.end()-1; it++)
+		ofSetLineWidth(2.0f);
+		ofSetColor(ofColor::red);
+		for (auto & con = m_con.begin(); con != m_con.end(); con++)
 		{
-			glm::vec3 start = m_mesh.getVertex(*it);
-			glm::vec3 end = m_mesh.getVertex(*it+1);
+			glm::vec3 & point0 = m_mesh.getVertices()[con->first];
 
-			glVertex3f(start.x, start.y, start.z);
-			glVertex3f(end.x, end.y, end.z);
+			for (auto & index : con->second)
+			{
+				glm::vec3 & point1 = m_mesh.getVertices()[index.first];
+
+				glm::vec3 start = point0;
+				glm::vec3 end = point0 + glm::normalize(point1 - point0) * index.second; // show the correct distance
+
+				glBegin(GL_LINES);
+				glVertex3f(start.x, start.y, start.z);
+				glVertex3f(end.x, end.y, end.z);
+				glEnd();
+			}
 		}
-		glEnd();
 
-		
-		glPointSize(6.0f);
-		ofSetColor(ofColor::purple);
-		glBegin(GL_POINTS);
-		glm::vec3 point = m_mesh.getVertex(m_outline.back());
-		glVertex3f(point.x, point.y, point.z);
-		glEnd();		
+		if (!m_outline.empty())
+		{
+			ofSetColor(ofColor::blue);
+			glBegin(GL_LINES);
+			for (auto it = m_outline.begin(); it != m_outline.end() - 1; it++)
+			{
+				glm::vec3 start = m_mesh.getVertex(*it);
+				glm::vec3 end = m_mesh.getVertex(*it + 1);
+
+				glVertex3f(start.x, start.y, start.z);
+				glVertex3f(end.x, end.y, end.z);
+			}
+			glEnd();
+
+			glPointSize(6.0f);
+			ofSetColor(ofColor::purple);
+			glBegin(GL_POINTS);
+			glm::vec3 point = m_mesh.getVertex(m_outline.back());
+			glVertex3f(point.x, point.y, point.z);
+			glEnd();
+		}
+
+		ofSetColor(ofColor::white);
+		for (auto & prop : m_properties)
+		{
+			ofDrawBitmapString(ofToString(prop.second.id), m_mesh.getVertex(prop.second.id));
+		}
 
 		ofPopStyle();
 	}

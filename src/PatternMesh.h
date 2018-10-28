@@ -21,6 +21,8 @@ namespace ami
 		struct Properties
 		{
 			bool isFix;
+			unsigned int id;
+			Operation::Type type;
 		};
 
 		void addTriangle(ofIndexType tri0, ofIndexType tri1, ofIndexType tri2);

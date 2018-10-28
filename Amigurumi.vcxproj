@@ -201,6 +201,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Amigurumi.cpp" />
+    <ClCompile Include="src\Operation.cpp" />
     <ClCompile Include="src\PatternGraph.cpp" />
     <ClCompile Include="src\PatternMesh.cpp" />
     <ClCompile Include="src\PatternView.cpp" />

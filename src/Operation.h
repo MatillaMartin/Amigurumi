@@ -1,13 +1,14 @@
 #pragma once
 
 #include "ofLog.h"
+#include "ofxXmlSettings.h"
 #include <map>
 
 namespace ami
 {
-	class Operation
+	class PatternGraph;
+	namespace Operation
 	{
-	public:
 		enum class Type {
 			// loop
 			LP,
@@ -29,32 +30,97 @@ namespace ami
 			NONE
 		};
 
-		typedef std::vector<Operation::Type> Operations;
-
-		static Operation::Type getOperation(const std::string & op)
+		class Operation
 		{
-			const static std::map<std::string, Type> m_operations =
+		public:
+			Operation(Type type) : type(type) {};
+			Type type;
+			virtual Operation * clone() const = 0;
+			virtual void apply(ami::PatternGraph & pattern) = 0;
+		};
+
+		typedef std::vector<std::unique_ptr<Operation>> Operations;
+
+		struct Loop : public Operation
+		{
+			Loop();
+			Loop * clone() const override { return new Loop(*this); }
+			void apply(ami::PatternGraph & pattern) override;
+		};
+		struct Chain : public Operation
+		{
+			Chain();
+			Chain * clone() const override { return new Chain(*this); }
+			void apply(ami::PatternGraph & pattern) override;
+		};
+		struct SingleCrochet : public Operation
+		{
+			SingleCrochet();
+			SingleCrochet * clone() const  override { return new SingleCrochet(*this); }
+			void apply(ami::PatternGraph & pattern) override;
+		};
+		struct Increase : public Operation
+		{
+			Increase();
+			Increase * clone() const  override { return new Increase(*this); }
+			void apply(ami::PatternGraph & pattern) override;
+		};
+		struct Decrease : public Operation
+		{
+			Decrease();
+			Decrease * clone() const  override { return new Decrease(*this); }
+			void apply(ami::PatternGraph & pattern) override;
+		};
+		struct MagicRing : public Operation
+		{
+			MagicRing();
+			MagicRing *clone() const  override { return new MagicRing(*this); }
+			void apply(ami::PatternGraph & pattern) override;
+		};
+		struct SlipStitch : public Operation
+		{
+			SlipStitch(unsigned int node = 0);
+			SlipStitch *clone() const  override { return new SlipStitch(*this); }
+			void apply(ami::PatternGraph & pattern) override;
+			unsigned int node;
+		};
+		struct FinishOff : public Operation
+		{
+			FinishOff();
+			FinishOff *clone() const  override { return new FinishOff(*this); }
+			void apply(ami::PatternGraph & pattern) override;
+		};
+		 
+		static std::unique_ptr<Operation> getOperation(const std::string & type, ofxXmlSettings & data)
+		{
+			static std::unordered_map<std::string, std::function<std::unique_ptr<Operation>(ofxXmlSettings & data)>> operationFactory
 			{
-				{ "LP", Type::LP },
-				{ "SC", Type::SC },
-				{ "INC", Type::INC },
-				{ "DEC", Type::DEC },
-				{ "MR", Type::MR },
-				{ "SLST", Type::SLST },
-				{ "FO", Type::FO }
+				{ "LP",		[](ofxXmlSettings & data) { return std::make_unique<Loop>(); } },
+				{ "SC",		[](ofxXmlSettings & data) { return std::make_unique<SingleCrochet>(); } },
+				{ "INC",	[](ofxXmlSettings & data) { return std::make_unique<Increase>(); } },
+				{ "DEC",	[](ofxXmlSettings & data) { return std::make_unique<Decrease>(); } },
+				{ "MR",		[](ofxXmlSettings & data) { return std::make_unique<MagicRing>(); } },
+				{ "SLST",	[](ofxXmlSettings & data) 
+					{ 
+						unsigned int node = data.getAttribute("Operation", "node", 0);
+						return std::make_unique<SlipStitch>(node); 
+					} 
+				},
+				{ "FO",		[](ofxXmlSettings & data) { return std::make_unique<FinishOff>(); } }
 			};
 
-			auto & op_it = m_operations.find(op);
-			if (op_it != m_operations.end())
+			auto & it = operationFactory.find(type);
+			if (it != operationFactory.end())
 			{
-				return op_it->second;
+				return it->second(data); // run command
 			}
-
-			ofLogWarning("Operation") << "getType: String " << op << " not found";
-			return Type::NONE;
+			else
+			{
+				throw std::invalid_argument("Operation " + type + " is not a valid operation");
+			}
 		}
-		
-		static std::string getString(Operation::Type op)
+
+		static std::string getString(Type op)
 		{
 			const static std::map<Type, std::string> m_operations =
 			{
@@ -77,17 +143,27 @@ namespace ami
 			return "NONE";
 		}
 
-		static Operations parseOperation(Operation::Type op, unsigned int count)
+		static Operations parseOperation(const Operation & op, unsigned int count)
 		{
-			if (op == Type::MR)
+			Operations ops;
+			ops.reserve(count);
+			if (op.type == Type::MR)
 			{
-				return Operations(count, Type::INC); // magic ring consists on "count inc"
+				for (unsigned int i = 0; i < count; i++)
+				{
+					ops.push_back(std::make_unique<Increase>());
+				}
 			}
 			// for the rest its simply the operation n times
 			else
 			{
-				return Operations(count, op);
+				for (unsigned int i = 0; i < count; i++)
+				{
+					ops.push_back(std::unique_ptr<Operation>(op.clone()));
+				}
 			}
+
+			return ops;
 		}
-	};
+	}
 }
