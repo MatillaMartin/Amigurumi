@@ -28,6 +28,12 @@ namespace ami
 			float distance = 0.f;
 		};
 
+		struct Joint
+		{
+			ofIndexType from = 0;
+			ofIndexType to = 0;
+		};
+
 		struct Node
 		{
 			ofIndexType id = 0;
@@ -94,6 +100,9 @@ namespace ami
 		const std::vector<Edge> & getEdges() const {
 			return m_edges;
 		}
+		const std::vector<Joint> & getJoints() const {
+			return m_joints;
+		}
 		const std::vector<Face> & getFaces() const {
 			return m_faces;
 		}
@@ -110,6 +119,7 @@ namespace ami
 		void apply(const Operation::MagicRing & op);
 		void apply(const Operation::SingleCrochet & op);
 		void apply(const Operation::SlipStitch & op);
+		void apply(const Operation::Join & op);
 		void apply(const Operation::Operation & op);
 
 	private:
@@ -161,6 +171,14 @@ namespace ami
 			m_edges.push_back(edge);
 		}
 
+		void addJoint(ofIndexType from, ofIndexType to)
+		{
+			Joint joint;
+			joint.from = from;
+			joint.to = to;
+			m_joints.push_back(joint);
+		}
+
 		void addFace(ofIndexType a, ofIndexType b, ofIndexType c)
 		{
 			if (a == b || a == c || b == c) return; // check triangles are valid
@@ -194,6 +212,7 @@ namespace ami
 	private:
 		std::vector<Node> m_nodes;
 		std::vector<Edge> m_edges;
+		std::vector<Joint> m_joints;
 		std::vector<Face> m_faces;
 		std::deque<NodeIterator> m_outline;
 	};

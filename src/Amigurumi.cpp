@@ -83,7 +83,7 @@ namespace ami
 				if (type != "")
 				{
 					// get operation
-					std::unique_ptr<Operation::Operation> operation = Operation::getOperation(type, data);
+					std::unique_ptr<Operation::Operation> operation = Operation::getOperation(type, data, operationIndex);
 					// parse for special operations (MR and others)
 					Operation::Operations operations = Operation::parseOperation(*operation, count);
 					op.insert(op.end(), std::make_move_iterator(operations.begin()), std::make_move_iterator(operations.end()));

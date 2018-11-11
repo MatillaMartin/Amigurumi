@@ -38,6 +38,11 @@ namespace ami
 			setDistanceConstrain(edge.from, edge.to, edge.distance * m_pointDistance);
 		}
 		
+		for (auto & joint : graph.getJoints())
+		{
+			setJoint(joint.from, joint.to);
+		}
+
 		for (auto & face : graph.getFaces())
 		{
 			m_mesh.addIndices(&face.ids[0], 3);
@@ -63,6 +68,10 @@ namespace ami
 
 		m_soft_con[a].insert({ b, distance });
 		m_soft_con[b].insert({ a, distance });
+	}
+	void PatternMesh::setJoint(ofIndexType a, ofIndexType b)
+	{
+		m_joints[a].insert(b);
 	}
 
 	void PatternMesh::update(float deltaTime)
@@ -124,8 +133,6 @@ namespace ami
 				point0 += tension * 0.5f; // update vertex following constraint
 				point1 -= tension * 0.5f; // update vertex following constraint
 			}
-
-			m_mesh.getVertices()[0] = ofVec3f(0); // insist on this constraint
 		}
 		
 		// solve soft constrains
@@ -149,6 +156,20 @@ namespace ami
 				}
 			}
 		}
+
+		// solve joints at the end
+		for (auto & joint = m_joints.begin(); joint != m_joints.end(); joint++)
+		{
+			glm::vec3 & point0 = m_mesh.getVertices()[joint->first];
+
+			for (auto & index : joint->second)
+			{
+				glm::vec3 & point1 = m_mesh.getVertices()[index];
+				point1 = point0;
+			}
+		}
+
+		m_mesh.getVertices()[0] = ofVec3f(0); // insist on this constraint
 	}
 
 	void PatternMesh::computeForces()
@@ -251,25 +272,30 @@ namespace ami
 		}
 		glEnd();
 		
-		ofSetLineWidth(2.0f);
-		ofSetColor(ofColor::red);
-		for (auto & con = m_con.begin(); con != m_con.end(); con++)
-		{
-			glm::vec3 & point0 = m_mesh.getVertices()[con->first];
+		//ofSetLineWidth(2.0f);
+		//for (auto & con = m_con.begin(); con != m_con.end(); con++)
+		//{  
 
-			for (auto & index : con->second)
-			{
-				glm::vec3 & point1 = m_mesh.getVertices()[index.first];
 
-				glm::vec3 start = point0;
-				glm::vec3 end = point0 + glm::normalize(point1 - point0) * index.second; // show the correct distance
+		//	glm::vec3 & point0 = m_mesh.getVertices()[con->first];
 
-				glBegin(GL_LINES);
-				glVertex3f(start.x, start.y, start.z);
-				glVertex3f(end.x, end.y, end.z);
-				glEnd();
-			}
-		}
+		//	for (auto & index : con->second)
+		//	{
+		//		glm::vec3 & point1 = m_mesh.getVertices()[index.first];
+
+		//		glm::vec3 start = point0;
+		//		float distance = glm::distance2(point1, point0);
+		//		glm::vec3 end = point0 + glm::normalize(point1 - point0) * index.second; // show the correct distance
+
+		//		ofColor color = ofColor::red;
+		//		ofSetColor(color.lerp(ofColor::white, distance / m_pointDistance));
+
+		//		glBegin(GL_LINES);
+		//		glVertex3f(start.x, start.y, start.z);
+		//		glVertex3f(end.x, end.y, end.z);
+		//		glEnd();
+		//	}
+		//}
 
 		if (!m_outline.empty())
 		{
@@ -278,7 +304,7 @@ namespace ami
 			for (auto it = m_outline.begin(); it != m_outline.end() - 1; it++)
 			{
 				glm::vec3 start = m_mesh.getVertex(*it);
-				glm::vec3 end = m_mesh.getVertex(*it + 1);
+				glm::vec3 end = m_mesh.getVertex(*(it + 1));
 
 				glVertex3f(start.x, start.y, start.z);
 				glVertex3f(end.x, end.y, end.z);

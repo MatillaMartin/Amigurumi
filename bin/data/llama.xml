@@ -152,10 +152,12 @@
 	<Command type="Pattern">
 	<Pattern id=2>
 		<Round>
-			<Operation type="SLST" node="330"/>
-			<Operation type="SLST" node="331"/>
-			<Operation type="SLST" node="332"/>
-			<Operation type="SC" count="3"/>
+			<Operation type="JOIN" node="149" with="329"/>
+			<Operation type="SC"/>
+			<Operation type="JOIN" node="148" with="330"/>
+			<Operation type="SC"/>
+			<Operation type="JOIN" node="147" with="331"/>
+			<Operation type="SC"/>
 		</Round>
 	</Pattern>
 	</Command>

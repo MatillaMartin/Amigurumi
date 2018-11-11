@@ -25,9 +25,9 @@ namespace ami
 			Operation::Type type;
 		};
 
-		void addTriangle(ofIndexType tri0, ofIndexType tri1, ofIndexType tri2);
 		void setDistanceConstrain(ofIndexType a, ofIndexType b, float distance);
 		void setAngleConstrain(ofIndexType a, ofIndexType b, float degrees);
+		void setJoint(ofIndexType a, ofIndexType b);
 		void solveConstraints();
 		void computeForces();
 		void verletUpdate(float deltaTime);
@@ -41,6 +41,7 @@ namespace ami
 		std::map <ofIndexType, glm::vec3> m_expansionForce;
 		std::map <ofIndexType, Properties> m_properties;
 		std::map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_con;
+		std::map <ofIndexType, std::set<ofIndexType>> m_joints;
 		std::map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_soft_con;
 
 		std::vector<glm::vec3> m_oldVec;

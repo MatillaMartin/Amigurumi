@@ -39,13 +39,17 @@ MagicRing::MagicRing()
 {}
 
 
-SlipStitch::SlipStitch(unsigned int node)
+SlipStitch::SlipStitch()
 	:
-	Operation(Type::SLST),
-	node(node)
-{
-}
+	Operation(Type::SLST)
+{}
 
+Join::Join(unsigned int node, unsigned int with)
+	:
+	Operation(Type::JOIN),
+	node(node),
+	with(with)
+{}
 
 FinishOff::FinishOff()
 	:
@@ -61,4 +65,5 @@ void Increase::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }
 void Decrease::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }
 void MagicRing::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }
 void SlipStitch::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }
+void Join::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }
 void FinishOff::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }

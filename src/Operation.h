@@ -26,6 +26,8 @@ namespace ami
 			FO,
 			// slip stitch
 			SLST,
+			// join
+			JOIN,
 			// nothing
 			NONE
 		};
@@ -79,10 +81,17 @@ namespace ami
 		};
 		struct SlipStitch : public Operation
 		{
-			SlipStitch(unsigned int node = 0);
+			SlipStitch();
 			SlipStitch *clone() const  override { return new SlipStitch(*this); }
 			void apply(ami::PatternGraph & pattern) override;
+		};
+		struct Join : public Operation
+		{
+			Join(unsigned int node = 0, unsigned int with = 0);
+			Join *clone() const  override { return new Join(*this); }
+			void apply(ami::PatternGraph & pattern) override;
 			unsigned int node;
+			unsigned int with;
 		};
 		struct FinishOff : public Operation
 		{
@@ -91,28 +100,30 @@ namespace ami
 			void apply(ami::PatternGraph & pattern) override;
 		};
 		 
-		static std::unique_ptr<Operation> getOperation(const std::string & type, ofxXmlSettings & data)
+		static std::unique_ptr<Operation> getOperation(const std::string & type, ofxXmlSettings & data, int which)
 		{
-			static std::unordered_map<std::string, std::function<std::unique_ptr<Operation>(ofxXmlSettings & data)>> operationFactory
+			static std::unordered_map<std::string, std::function<std::unique_ptr<Operation>(ofxXmlSettings&, int)>> operationFactory
 			{
-				{ "LP",		[](ofxXmlSettings & data) { return std::make_unique<Loop>(); } },
-				{ "SC",		[](ofxXmlSettings & data) { return std::make_unique<SingleCrochet>(); } },
-				{ "INC",	[](ofxXmlSettings & data) { return std::make_unique<Increase>(); } },
-				{ "DEC",	[](ofxXmlSettings & data) { return std::make_unique<Decrease>(); } },
-				{ "MR",		[](ofxXmlSettings & data) { return std::make_unique<MagicRing>(); } },
-				{ "SLST",	[](ofxXmlSettings & data) 
-					{ 
-						unsigned int node = data.getAttribute("Operation", "node", 0);
-						return std::make_unique<SlipStitch>(node); 
-					} 
+				{ "LP",		[](ofxXmlSettings & data, int which) { return std::make_unique<Loop>(); } },
+				{ "SC",		[](ofxXmlSettings & data, int which) { return std::make_unique<SingleCrochet>(); } },
+				{ "INC",	[](ofxXmlSettings & data, int which) { return std::make_unique<Increase>(); } },
+				{ "DEC",	[](ofxXmlSettings & data, int which) { return std::make_unique<Decrease>(); } },
+				{ "MR",		[](ofxXmlSettings & data, int which) { return std::make_unique<MagicRing>(); } },
+				{ "SLST",	[](ofxXmlSettings & data, int which) { return std::make_unique<SlipStitch>(); } },
+				{ "JOIN",	[](ofxXmlSettings & data, int which)
+					{
+						unsigned int node = data.getAttribute("Operation", "node", 0, which);
+						unsigned int with = data.getAttribute("Operation", "with", 0, which);
+						return std::make_unique<Join>(node, with);
+					}
 				},
-				{ "FO",		[](ofxXmlSettings & data) { return std::make_unique<FinishOff>(); } }
+				{ "FO",		[](ofxXmlSettings & data, int which) { return std::make_unique<FinishOff>(); } }
 			};
 
 			auto & it = operationFactory.find(type);
 			if (it != operationFactory.end())
 			{
-				return it->second(data); // run command
+				return it->second(data, which); // run command
 			}
 			else
 			{
@@ -130,6 +141,7 @@ namespace ami
 				{ Type::DEC, "DEC" },
 				{ Type::MR, "MR" },
 				{ Type::SLST, "SLST" },
+				{ Type::JOIN, "JOIN" },
 				{ Type::FO, "FO" }
 			};
 

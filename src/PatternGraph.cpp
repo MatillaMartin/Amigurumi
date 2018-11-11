@@ -117,7 +117,7 @@ void PatternGraph::apply(const Operation::FinishOff & op)
 	while (nextClose < lastClose) // until last and next meets. Careful!
 	{
 		// add constraint
-		addEdge(nextClose.id, lastClose.id, 0.f);
+		addJoint(nextClose.id, lastClose.id);
 
 		nextClose = nextClose.next(); // advance next
 		lastClose = lastClose.last(); // go back in last
@@ -176,15 +176,15 @@ void PatternGraph::apply(const Operation::SingleCrochet & op)
 void PatternGraph::apply(const Operation::SlipStitch & op)
 {
 	// this operation does not add a new vertex
-	NodeIterator under = back().last();
-	if (op.node != 0)
-	{
-		under = this->get(op.node);
-	}
-
+	NodeIterator under = back().under().next();
 	NodeIterator node = back();
-
 	addEdge(node.id, under.id, 0.f);
+}
+
+void PatternGraph::apply(const Operation::Join & op)
+{
+	// this operation does not add a new vertex, just joins them
+	addJoint(op.node, op.with);
 }
 
 void PatternGraph::apply(const Operation::Operation & op)
