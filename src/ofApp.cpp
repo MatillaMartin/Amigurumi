@@ -25,8 +25,9 @@ void ofApp::setup(){
 
 	try
 	{
-		m_ami = Amigurumi(m_filepath).getPattern();
-		m_view.setPattern(m_ami, m_settings.step);
+		m_ami = make_unique<Amigurumi>(m_filepath);
+		m_viewParams = make_unique<PatternView::Params>(m_filepath);
+		m_view = make_unique<PatternView>(m_ami->getPattern(), *m_viewParams);
 	}
 	catch (std::invalid_argument & e)
 	{
@@ -75,7 +76,7 @@ void ofApp::update(){
 
 void ofApp::updateStep(float dt)
 {
-	m_view.update(dt);
+	m_view->update(dt);
 }
 
 
@@ -84,7 +85,7 @@ void ofApp::draw(){
 	ofClear(0);
 	m_cam.begin();
 		ofDrawAxis(10);
-		m_view.render();
+		m_view->render();
 		m_cam.end();
 
 	ofDrawBitmapStringHighlight(m_helpInfo, glm::vec3(50, 50, 0));
@@ -94,7 +95,7 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key) {
 	if (key == ' ')
 	{
-		m_view.setPattern(m_ami, m_settings.step);
+		m_view = make_unique<PatternView>(m_ami->getPattern(), *m_viewParams);
 	}
 	if (key == 'l' || key == 'L')
 	{
@@ -104,8 +105,9 @@ void ofApp::keyPressed(int key) {
 			m_filepath = res.filePath;
 			try
 			{
-				m_ami = Amigurumi(m_filepath).getPattern();
-				m_view.setPattern(m_ami, m_settings.step);
+				m_ami = make_unique<Amigurumi>(m_filepath);
+				m_viewParams = make_unique<PatternView::Params>(m_filepath);
+				m_view = make_unique<PatternView>(m_ami->getPattern(), *m_viewParams);
 			}
 			catch (std::invalid_argument & e)
 			{

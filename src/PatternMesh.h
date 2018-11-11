@@ -4,6 +4,7 @@
 #include "PatternDef.h"
 
 #include <set>
+#include <unordered_map>
 #include "PatternGraph.h"
 
 namespace ami
@@ -11,8 +12,14 @@ namespace ami
 	class PatternMesh
 	{
 	public:
+		struct Anchor
+		{
+			ofIndexType node;
+			glm::vec3 anchor;
+		};
+
 		PatternMesh() {};
-		PatternMesh(const PatternGraph & graph);
+		PatternMesh(const PatternGraph & graph, const std::vector<Anchor> & anchors);
 
 		void update(float deltaTime);
 
@@ -38,15 +45,16 @@ namespace ami
 
 		glm::vec3 m_center;
 
-		std::map <ofIndexType, glm::vec3> m_expansionForce;
-		std::map <ofIndexType, Properties> m_properties;
-		std::map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_con;
-		std::map <ofIndexType, std::set<ofIndexType>> m_joints;
-		std::map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_soft_con;
+		std::unordered_map <ofIndexType, glm::vec3> m_expansionForce;
+		std::unordered_map <ofIndexType, Properties> m_properties;
+		std::unordered_map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_con;
+		std::unordered_map <ofIndexType, std::set<ofIndexType>> m_joints;
+		std::unordered_map <ofIndexType, std::set<std::pair<ofIndexType, float>>> m_soft_con;
+		std::vector<ofIndexType> m_outline;
+		
+		std::vector<Anchor> m_anchors;
 
 		std::vector<glm::vec3> m_oldVec;
-
-		std::vector<ofIndexType> m_outline;
 
 		unsigned int m_roundNum;
 		float m_pointDistance;

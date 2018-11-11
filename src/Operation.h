@@ -99,7 +99,7 @@ namespace ami
 			FinishOff *clone() const  override { return new FinishOff(*this); }
 			void apply(ami::PatternGraph & pattern) override;
 		};
-		 
+
 		static std::unique_ptr<Operation> getOperation(const std::string & type, ofxXmlSettings & data, int which)
 		{
 			static std::unordered_map<std::string, std::function<std::unique_ptr<Operation>(ofxXmlSettings&, int)>> operationFactory

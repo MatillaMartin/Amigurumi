@@ -16,7 +16,7 @@ namespace ami
 			data.load(file);
 
 			data.pushTag(tagAmi);
-			// for each pattern
+			// for each command
 			for (unsigned int commandIndex = 0; commandIndex < data.getNumTags(tagCommand); commandIndex++)
 			{
 				std::string type = data.getAttribute(tagCommand, "type", "", commandIndex);
@@ -32,6 +32,8 @@ namespace ami
 
 				data.popTag();
 			}
+			data.popTag(); // anchors
+
 			data.popTag(); // ami
 		}
 		else
@@ -42,16 +44,16 @@ namespace ami
 
 	void Amigurumi::command(const std::string & type, ofxXmlSettings & data)
 	{
-		static std::unordered_map<std::string, std::function<std::unique_ptr<Command>(ofxXmlSettings & data)>> commandFactory
+		static std::unordered_map<std::string, std::function<std::unique_ptr<Command>(Amigurumi &, ofxXmlSettings &)>> commandFactory
 		{
-			{ "Pattern", [this](ofxXmlSettings & data) { return make_unique<PatternCommand>(*this, data); } },
-			{ "Join", [this](ofxXmlSettings & data) { return make_unique<JoinCommand>(*this, data); } },
+			{ "Pattern", [](Amigurumi & ami, ofxXmlSettings & data) { return make_unique<PatternCommand>(ami, data); } },
+			{ "Join", [](Amigurumi & ami, ofxXmlSettings & data) { return make_unique<JoinCommand>(ami, data); } },
 		};
 
 		auto & it = commandFactory.find(type);
 		if (it != commandFactory.end())
 		{
-			it->second(data); // run command
+			it->second(*this, data); // run command
 		}
 		else
 		{

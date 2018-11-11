@@ -36,8 +36,9 @@ public:
 
 	std::string m_filepath;
 	ofEasyCam m_cam;
-	PatternView m_view;
-	PatternGraph m_ami;
+	std::unique_ptr<Amigurumi> m_ami;
+	std::unique_ptr<PatternView::Params> m_viewParams;
+	std::unique_ptr<PatternView> m_view;
 
 	float m_leftOverTime;
 	float m_fixedUpdateMillis;

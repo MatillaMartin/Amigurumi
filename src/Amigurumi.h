@@ -30,6 +30,7 @@ namespace ami
 
 		std::map<unsigned int, PatternGraph> m_patterns;
 		unsigned int m_pattern;
+
 	};
 
 }

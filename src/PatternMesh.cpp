@@ -6,7 +6,7 @@
 
 namespace ami
 {
-	PatternMesh::PatternMesh(const PatternGraph & graph)
+	PatternMesh::PatternMesh(const PatternGraph & graph, const std::vector<Anchor> & anchors)
 		:
 		m_pointDistance (1.0f),
 		m_roundNum (0),
@@ -52,6 +52,8 @@ namespace ami
 		{
 			m_outline.push_back(it.id);
 		}
+
+		m_anchors = anchors;
 	}
 
 	void PatternMesh::setDistanceConstrain(ofIndexType a, ofIndexType b, float distance)
@@ -117,6 +119,12 @@ namespace ami
 
 	void PatternMesh::solveConstraints()
 	{
+		// solve anchors
+		for (auto & anchor : m_anchors)
+		{
+			m_mesh.getVertices()[anchor.node] = anchor.anchor; // insist on this constraint
+		}
+
 		// solve constrains
 		for (auto & con = m_con.begin(); con != m_con.end(); con++)
 		{
@@ -168,8 +176,6 @@ namespace ami
 				point1 = point0;
 			}
 		}
-
-		m_mesh.getVertices()[0] = ofVec3f(0); // insist on this constraint
 	}
 
 	void PatternMesh::computeForces()
