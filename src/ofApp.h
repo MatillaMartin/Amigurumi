@@ -44,6 +44,7 @@ public:
 	float m_fixedUpdateMillis;
 	float m_fps;
 	bool m_bRun;
+	PatternView::RenderSettings m_viewRenderSettings;
 
 	ofApp::Settings m_settings;
 };

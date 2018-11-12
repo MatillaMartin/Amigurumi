@@ -8,6 +8,11 @@ namespace ami
 	class PatternView
 	{
 	public:
+		struct RenderSettings
+		{
+			bool debug;
+		};
+
 		class Params
 		{
 		public:
@@ -69,7 +74,7 @@ namespace ami
 		PatternView();
 		PatternView(const PatternGraph & pattern, const Params & params);
 
-		void render();
+		void render(const PatternView::RenderSettings & settings);
 
 		void update(float deltaTime);
 

@@ -10,9 +10,18 @@ namespace ami
 		m_mesh = PatternMesh(pattern, params.anchors);
 	}
 
-	void PatternView::render()
+	void PatternView::render(const PatternView::RenderSettings & settings)
 	{
-		m_mesh.draw();
+		PatternMesh::DrawSettings drawsettings;
+		if (settings.debug)
+		{
+			drawsettings = { true, true, true };
+		}
+		else
+		{
+			drawsettings = { false, false, false };
+		}
+		m_mesh.draw(drawsettings);
 	}
 
 	void PatternView::update(float deltaTime)

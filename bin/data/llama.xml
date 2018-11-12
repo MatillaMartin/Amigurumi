@@ -163,9 +163,10 @@
 	</Command>
 </Amigurumi>
 <View>
-	<Anchor node="0" x="0" y="0" z="0"/>
-	<Anchor node="165" x="0" y="10" z="0"/>
-	<Anchor node="166" x="10" y="0" z="0"/>
-	<Anchor node="320" x="10" y="10" z="0"/>
+	<Anchor node="0"	x="0" 	y="0" 	z="0"/>
+	<Anchor node="155"	x="-4"	y="12"	z="0"/>
+	<Anchor node="165"	x="4"	y="12"	z="0"/>
+	<Anchor node="166"	x="9"	y="0" 	z="0"/>
+	<Anchor node="320"	x="10"	y="12"	z="0"/>
 </View>	
 

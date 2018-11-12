@@ -18,12 +18,19 @@ namespace ami
 			glm::vec3 anchor;
 		};
 
+		struct DrawSettings
+		{
+			bool id = false;
+			bool forces = false;
+			bool outline = false;
+		};
+
 		PatternMesh() {};
 		PatternMesh(const PatternGraph & graph, const std::vector<Anchor> & anchors);
 
 		void update(float deltaTime);
 
-		void draw();
+		void draw(const PatternMesh::DrawSettings & settings);
 	private:
 		struct Properties
 		{

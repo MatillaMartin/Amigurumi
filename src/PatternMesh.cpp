@@ -54,6 +54,10 @@ namespace ami
 		}
 
 		m_anchors = anchors;
+		for (auto & anchor : anchors)
+		{
+			m_properties[anchor.node].isFix = true;
+		}
 	}
 
 	void PatternMesh::setDistanceConstrain(ofIndexType a, ofIndexType b, float distance)
@@ -86,14 +90,6 @@ namespace ami
 		for (unsigned int i = 0; i < m_solveIterations; i++)
 		{
 			this->solveConstraints();
-		}
-
-		this->updateCenter();
-		// center mesh
-		for (auto & vert : m_mesh.getVertices())
-		{
-			vert.x -= m_center.x;
-			vert.z -= m_center.z;
 		}
 	}
 
@@ -138,8 +134,14 @@ namespace ami
 				if (dist == 0.0f) dist = std::numeric_limits<float>::epsilon(); // check for zero division
 				glm::vec3 tension = distVec * (index.second - dist) / dist;
 
-				point0 += tension * 0.5f; // update vertex following constraint
-				point1 -= tension * 0.5f; // update vertex following constraint
+				//if(!m_properties[con->first].isFix)
+				//{ 
+					point0 += tension * 0.5f; // update vertex following constraint
+				//}
+				//if (!m_properties[index.first].isFix)
+				//{
+					point1 -= tension * 0.5f; // update vertex following constraint
+				//}
 			}
 		}
 		
@@ -172,8 +174,7 @@ namespace ami
 
 			for (auto & index : joint->second)
 			{
-				glm::vec3 & point1 = m_mesh.getVertices()[index];
-				point1 = point0;
+				m_mesh.getVertices()[index] = point0;
 			}
 		}
 	}
@@ -196,13 +197,6 @@ namespace ami
 
 			m_expansionForce[con->first] = avgNormal * 2000.0f;
 		}
-	}
-
-	void PatternMesh::updateCenter()
-	{
-		// find mesh center
-		m_center = std::accumulate(m_mesh.getVertices().begin(), m_mesh.getVertices().end(), glm::vec3(0));
-		m_center /= m_mesh.getNumVertices();
 	}
 
 	void PatternMesh::updateNormals()
@@ -232,7 +226,7 @@ namespace ami
 		m_mesh.addNormals(vertexNormals);
 	}
 
-	void PatternMesh::draw()
+	void PatternMesh::draw(const PatternMesh::DrawSettings & settings)
 	{
 		ofPushStyle();
 		ofDisableDepthTest();
@@ -266,17 +260,19 @@ namespace ami
 		//	glEnd();
 		//}
 
-
-		ofSetColor(ofColor::green);
-		glBegin(GL_LINES);
-		for (auto & tension : m_expansionForce)
+		if (settings.forces)
 		{
-			glm::vec3 start = m_mesh.getVertex(tension.first);
-			glm::vec3 end = start + glm::normalize(tension.second);
-			glVertex3f(start.x, start.y, start.z);
-			glVertex3f(end.x, end.y, end.z);
+			ofSetColor(ofColor::green);
+			glBegin(GL_LINES);
+			for (auto & tension : m_expansionForce)
+			{
+				glm::vec3 start = m_mesh.getVertex(tension.first);
+				glm::vec3 end = start + glm::normalize(tension.second);
+				glVertex3f(start.x, start.y, start.z);
+				glVertex3f(end.x, end.y, end.z);
+			}
+			glEnd();
 		}
-		glEnd();
 		
 		//ofSetLineWidth(2.0f);
 		//for (auto & con = m_con.begin(); con != m_con.end(); con++)
@@ -303,32 +299,38 @@ namespace ami
 		//	}
 		//}
 
-		if (!m_outline.empty())
+		if (settings.outline)
 		{
-			ofSetColor(ofColor::blue);
-			glBegin(GL_LINES);
-			for (auto it = m_outline.begin(); it != m_outline.end() - 1; it++)
+			if (!m_outline.empty())
 			{
-				glm::vec3 start = m_mesh.getVertex(*it);
-				glm::vec3 end = m_mesh.getVertex(*(it + 1));
+				ofSetColor(ofColor::blue);
+				glBegin(GL_LINES);
+				for (auto it = m_outline.begin(); it != m_outline.end() - 1; it++)
+				{
+					glm::vec3 start = m_mesh.getVertex(*it);
+					glm::vec3 end = m_mesh.getVertex(*(it + 1));
 
-				glVertex3f(start.x, start.y, start.z);
-				glVertex3f(end.x, end.y, end.z);
+					glVertex3f(start.x, start.y, start.z);
+					glVertex3f(end.x, end.y, end.z);
+				}
+				glEnd();
+
+				glPointSize(6.0f);
+				ofSetColor(ofColor::purple);
+				glBegin(GL_POINTS);
+				glm::vec3 point = m_mesh.getVertex(m_outline.back());
+				glVertex3f(point.x, point.y, point.z);
+				glEnd();
 			}
-			glEnd();
-
-			glPointSize(6.0f);
-			ofSetColor(ofColor::purple);
-			glBegin(GL_POINTS);
-			glm::vec3 point = m_mesh.getVertex(m_outline.back());
-			glVertex3f(point.x, point.y, point.z);
-			glEnd();
 		}
 
-		ofSetColor(ofColor::white);
-		for (auto & prop : m_properties)
+		if (settings.id)
 		{
-			ofDrawBitmapString(ofToString(prop.second.id), m_mesh.getVertex(prop.second.id));
+			ofSetColor(ofColor::white);
+			for (auto & prop : m_properties)
+			{
+				ofDrawBitmapString(ofToString(prop.second.id), m_mesh.getVertex(prop.second.id));
+			}
 		}
 
 		ofPopStyle();

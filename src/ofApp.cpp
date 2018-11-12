@@ -4,7 +4,8 @@
 //--------------------------------------------------------------
 ofApp::ofApp(const ofApp::Settings & settings)
 	:
-	m_settings(settings)
+	m_settings(settings),
+	m_viewRenderSettings({ false })
 {}
 
 //--------------------------------------------------------------
@@ -85,7 +86,7 @@ void ofApp::draw(){
 	ofClear(0);
 	m_cam.begin();
 		ofDrawAxis(10);
-		m_view->render();
+		m_view->render(m_viewRenderSettings);
 		m_cam.end();
 
 	ofDrawBitmapStringHighlight(m_helpInfo, glm::vec3(50, 50, 0));
@@ -124,6 +125,11 @@ void ofApp::keyPressed(int key) {
 	if (key == 's' || key == 'S')
 	{
 		this->updateStep(m_fixedUpdateMillis);
+	}
+
+	if (key == 'd' || key == 'D')
+	{
+		m_viewRenderSettings.debug = !m_viewRenderSettings.debug;
 	}
 }
 
