@@ -5,65 +5,53 @@ using namespace ami::Operation;
 
 Loop::Loop()
 	:
-	Operation(Type::LP)
+	OperationCRTP(Type::LP)
 {}
 
 
 Chain::Chain()
 	:
-	Operation(Type::CH)
+	OperationCRTP(Type::CH)
 {}
 
 
 SingleCrochet::SingleCrochet()
 	:
-	Operation(Type::SC)
+	OperationCRTP(Type::SC)
 {}
 
 
 Increase::Increase()
 	:
-	Operation(Type::INC)
+	OperationCRTP(Type::INC)
 {}
 
 
 Decrease::Decrease()
 	:
-	Operation(Type::DEC)
+	OperationCRTP(Type::DEC)
 {}
 
 
 MagicRing::MagicRing()
 	:
-	Operation(Type::MR)
+	OperationCRTP(Type::MR)
 {}
 
 
 SlipStitch::SlipStitch()
 	:
-	Operation(Type::SLST)
+	OperationCRTP(Type::SLST)
 {}
 
 Join::Join(unsigned int node, unsigned int with)
 	:
-	Operation(Type::JOIN),
+	OperationCRTP(Type::JOIN),
 	node(node),
 	with(with)
 {}
 
 FinishOff::FinishOff()
 	:
-	Operation(Type::FO)
+	OperationCRTP(Type::FO)
 {}
-
-
-// visitor pattern for graph
-void Loop::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }
-void Chain::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }
-void SingleCrochet::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }
-void Increase::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }
-void Decrease::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }
-void MagicRing::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }
-void SlipStitch::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }
-void Join::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }
-void FinishOff::apply(ami::PatternGraph & pattern) { pattern.apply(*this); }

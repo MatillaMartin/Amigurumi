@@ -41,63 +41,54 @@ namespace ami
 			virtual void apply(ami::PatternGraph & pattern) = 0;
 		};
 
+		template <typename T>
+		class OperationCRTP : public Operation
+		{
+		public:
+			OperationCRTP(Type type) : Operation(type) { }
+			Operation * clone() const final override { return new T(static_cast<T const &>(*this)); }
+			void apply(ami::PatternGraph & pattern) final override { pattern.apply(static_cast<T const &>(*this)); };
+		};
+
 		typedef std::vector<std::unique_ptr<Operation>> Operations;
 
-		struct Loop : public Operation
+		struct Loop : public OperationCRTP<Loop>
 		{
 			Loop();
-			Loop * clone() const override { return new Loop(*this); }
-			void apply(ami::PatternGraph & pattern) override;
 		};
-		struct Chain : public Operation
+		struct Chain : public OperationCRTP<Chain>
 		{
 			Chain();
-			Chain * clone() const override { return new Chain(*this); }
-			void apply(ami::PatternGraph & pattern) override;
 		};
-		struct SingleCrochet : public Operation
+		struct SingleCrochet : public OperationCRTP<SingleCrochet>
 		{
 			SingleCrochet();
-			SingleCrochet * clone() const  override { return new SingleCrochet(*this); }
-			void apply(ami::PatternGraph & pattern) override;
 		};
-		struct Increase : public Operation
+		struct Increase : public OperationCRTP<Increase>
 		{
 			Increase();
-			Increase * clone() const  override { return new Increase(*this); }
-			void apply(ami::PatternGraph & pattern) override;
 		};
-		struct Decrease : public Operation
+		struct Decrease : public OperationCRTP<Decrease>
 		{
 			Decrease();
-			Decrease * clone() const  override { return new Decrease(*this); }
-			void apply(ami::PatternGraph & pattern) override;
 		};
-		struct MagicRing : public Operation
+		struct MagicRing : public OperationCRTP<MagicRing>
 		{
 			MagicRing();
-			MagicRing *clone() const  override { return new MagicRing(*this); }
-			void apply(ami::PatternGraph & pattern) override;
 		};
-		struct SlipStitch : public Operation
+		struct SlipStitch : public OperationCRTP<SlipStitch>
 		{
 			SlipStitch();
-			SlipStitch *clone() const  override { return new SlipStitch(*this); }
-			void apply(ami::PatternGraph & pattern) override;
 		};
-		struct Join : public Operation
+		struct Join : public OperationCRTP<Join>
 		{
 			Join(unsigned int node = 0, unsigned int with = 0);
-			Join *clone() const  override { return new Join(*this); }
-			void apply(ami::PatternGraph & pattern) override;
 			unsigned int node;
 			unsigned int with;
 		};
-		struct FinishOff : public Operation
+		struct FinishOff : public OperationCRTP<FinishOff>
 		{
 			FinishOff();
-			FinishOff *clone() const  override { return new FinishOff(*this); }
-			void apply(ami::PatternGraph & pattern) override;
 		};
 
 		static std::unique_ptr<Operation> getOperation(const std::string & type, ofxXmlSettings & data, int which)
