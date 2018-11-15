@@ -133,13 +133,14 @@ namespace ami
 			NodeIterator it(m_nodes, node.id);
 			m_nodes.push_back(node);
 
-			if (node.id > 0)
+			if (!m_outline.empty())
 			{
-				it.node().last = node.id - 1; 
-				it.last().node().next = node.id; // asign ourselves as our last's next
+				NodeIterator last = back();
+				it.node().last = last.id;
+				last.node().next = node.id; // asign ourselves as our last's next
 			}
 
-			addOutline(it);
+			addOutline(it); // add to outline
 			return it;
 		}
 

@@ -5,7 +5,7 @@
 //========================================================================
 int main(int argc, char *argv[]) {
 	ofSetupOpenGL(1024,768,OF_WINDOW);			// <-------- setup the GL context
-
+	ofLogToConsole();
 	// this kicks off the running of my app
 	// can be OF_WINDOW or OF_FULLSCREEN
 	// pass in width and height too:
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 	}
 	catch (const cxxopts::OptionException& e)
 	{
-		std::cout << "error parsing options: " << e.what() << std::endl;
+		ofLogError("main") << "error parsing options: " << e.what();
 		exit(1);
 	}
 }

@@ -53,10 +53,18 @@ namespace ami
 			m_outline.push_back(it.id);
 		}
 
-		m_anchors = anchors;
+		m_anchors.reserve(anchors.size());
 		for (auto & anchor : anchors)
 		{
-			m_properties[anchor.node].isFix = true;
+			if (anchor.node < graph.getNodes().size())
+			{
+				m_anchors.push_back(anchor);
+				m_properties[anchor.node].isFix = true;
+			}
+			else
+			{
+				ofLogWarning("PatternMesh") << "Anchor for node " << anchor.node << " invalid, node does not exist";
+			}
 		}
 	}
 

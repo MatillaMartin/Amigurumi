@@ -152,12 +152,13 @@
 	<Command type="Pattern">
 	<Pattern id=2>
 		<Round>
-			<Operation type="JOIN" node="149" with="329"/>
-			<Operation type="SC"/>
-			<Operation type="JOIN" node="148" with="330"/>
-			<Operation type="SC"/>
-			<Operation type="JOIN" node="147" with="331"/>
-			<Operation type="SC"/>
+			<Operation type="JOIN" node="150" with="329"/>
+			<Operation type="SC" count="1"/>
+			<Operation type="JOIN" node="149" with="330"/>
+			<Operation type="SC" count="1"/>
+			<Operation type="JOIN" node="148" with="331"/>
+			<Operation type="SC" count="1"/>
+			
 		</Round>
 	</Pattern>
 	</Command>
@@ -165,8 +166,14 @@
 <View>
 	<Anchor node="0"	x="0" 	y="0" 	z="0"/>
 	<Anchor node="155"	x="-4"	y="12"	z="0"/>
-	<Anchor node="165"	x="4"	y="12"	z="0"/>
-	<Anchor node="166"	x="9"	y="0" 	z="0"/>
+	
+	<Anchor node="165"	x="4.5"	y="11"	z="2"/>
+	<Anchor node="332"	x="5.5"	y="11"	z="2"/>
+	
+	<Anchor node="150"	x="4.5"	y="11"	z="-2"/>
+	<Anchor node="328"	x="5.5"	y="11"	z="-2"/>
+	
+	<Anchor node="166"	x="9"	y="0" 	z="0"/>	
 	<Anchor node="320"	x="10"	y="12"	z="0"/>
 </View>	
 
