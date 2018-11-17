@@ -48,9 +48,9 @@ namespace ami
 			m_mesh.addIndices(&face.ids[0], 3);
 		}
 
-		for (auto & it : graph.getOutline())
+		for (auto & id : graph.getOutline())
 		{
-			m_outline.push_back(it.id);
+			m_outline.push_back(id);
 		}
 
 		m_anchors.reserve(anchors.size());
@@ -326,9 +326,20 @@ namespace ami
 				glPointSize(6.0f);
 				ofSetColor(ofColor::purple);
 				glBegin(GL_POINTS);
-				glm::vec3 point = m_mesh.getVertex(m_outline.back());
-				glVertex3f(point.x, point.y, point.z);
+				glm::vec3 front = m_mesh.getVertex(m_outline.front());
+				glVertex3f(front.x, front.y, front.z);
 				glEnd();
+				ofSetColor(ofColor::white);
+				ofDrawBitmapString("Front", front + glm::vec3(0, 0.1, 0));
+
+				glPointSize(6.0f);
+				ofSetColor(ofColor::beige);
+				glBegin(GL_POINTS);
+				glm::vec3 back = m_mesh.getVertex(m_outline.back());
+				glVertex3f(back.x, back.y, back.z);
+				glEnd();
+				ofSetColor(ofColor::white);
+				ofDrawBitmapString("Back", back + glm::vec3(0, 0.1, 0));
 			}
 		}
 
@@ -339,6 +350,19 @@ namespace ami
 			{
 				ofDrawBitmapString(ofToString(prop.second.id), m_mesh.getVertex(prop.second.id));
 			}
+		}
+
+		if (settings.anchor)
+		{
+			ofSetColor(ofColor::yellow);
+			glBegin(GL_POINTS);
+			for (auto & anchor : m_anchors)
+			{
+				glPointSize(6.0f);
+				glm::vec3 point = m_mesh.getVertex(anchor.node);
+				glVertex3f(point.x, point.y, point.z);
+			}
+			glEnd();
 		}
 
 		ofPopStyle();

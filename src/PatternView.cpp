@@ -15,11 +15,11 @@ namespace ami
 		PatternMesh::DrawSettings drawsettings;
 		if (settings.debug)
 		{
-			drawsettings = { true, false, true };
+			drawsettings = { true, false, true, true };
 		}
 		else
 		{
-			drawsettings = { false, false, false };
+			drawsettings = { false, false, false, false };
 		}
 		m_mesh.draw(drawsettings);
 	}

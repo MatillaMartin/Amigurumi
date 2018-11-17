@@ -70,6 +70,9 @@
 			<Round>
 				<Operation type="SC" count="18"/>
 			</Round>
+			<Round>
+				<Operation type="SLST"/>
+			</Round>
 		</Pattern>
 	</Command>
 	<Command type="Pattern">
@@ -152,28 +155,32 @@
 	<Command type="Pattern">
 	<Pattern id=2>
 		<Round>
-			<Operation type="JOIN" node="150" with="329"/>
+			<Operation type="JOIN" node="330" with="148"/>
 			<Operation type="SC" count="1"/>
-			<Operation type="JOIN" node="149" with="330"/>
+			<Operation type="JOIN" node="329" with="149"/>
 			<Operation type="SC" count="1"/>
-			<Operation type="JOIN" node="148" with="331"/>
+			<Operation type="JOIN" node="328" with="150"/>
 			<Operation type="SC" count="1"/>
-			
 		</Round>
 	</Pattern>
 	</Command>
 </Amigurumi>
+
 <View>
 	<Anchor node="0"	x="0" 	y="0" 	z="0"/>
-	<Anchor node="155"	x="-4"	y="12"	z="0"/>
+	<!-- <Anchor node="132"	x="4.5"	y="10"	z="-3"/> -->
+	<Anchor node="155"	x="-3"	y="12"	z="0"/>
+	<Anchor node="165"	x="3"	y="11"	z="3"/>
+	<!-- <Anchor node="293"	x="6"	y="10"	z="0"/> -->
+	<!-- <Anchor node="332"	x="5.5"	y="11"	z="2"/> -->
 	
-	<Anchor node="165"	x="4.5"	y="11"	z="2"/>
-	<Anchor node="332"	x="5.5"	y="11"	z="2"/>
+	<!-- <Anchor node="150"	x="4.5"	y="11"	z="-2"/> -->
+	<!-- <Anchor node="328"	x="5.5"	y="11"	z="-2"/> -->
 	
-	<Anchor node="150"	x="4.5"	y="11"	z="-2"/>
-	<Anchor node="328"	x="5.5"	y="11"	z="-2"/>
+	<Anchor node="166"	x="8"	y="0" 	z="0"/>	
+	<Anchor node="320"	x="12"	y="12"	z="0"/>
 	
-	<Anchor node="166"	x="9"	y="0" 	z="0"/>	
-	<Anchor node="320"	x="10"	y="12"	z="0"/>
+	<Anchor node="331" 	x="4"	y="12"	z="3"/>
+	<Anchor node="334" 	x="4"	y="12"	z="-3"/>
 </View>	
 

@@ -39,7 +39,7 @@ namespace ami
 			ofIndexType id = 0;
 
 			ofIndexType last;
-			ofIndexType under;
+			//ofIndexType under;
 			ofIndexType next;
 
 			Data data;
@@ -51,7 +51,7 @@ namespace ami
 			NodeIterator(std::vector<Node> & nodes, ofIndexType id) : m_nodes(&nodes), id(id) {}
 
 			NodeIterator last() { return NodeIterator(*m_nodes, node().last); }
-			NodeIterator under() { return NodeIterator(*m_nodes, node().under); }
+			//NodeIterator under() { return NodeIterator(*m_nodes, node().under); }
 			NodeIterator next() { return NodeIterator(*m_nodes, node().next); }
 
 			Node & node() { return m_nodes->at(id); }
@@ -106,7 +106,7 @@ namespace ami
 		const std::vector<Face> & getFaces() const {
 			return m_faces;
 		}
-		const std::deque<NodeIterator> & getOutline() const {
+		const std::deque<ofIndexType> & getOutline() const {
 			return m_outline;
 		}
 
@@ -124,71 +124,17 @@ namespace ami
 
 	private:
 
-		NodeIterator addNode(const Data & data)
-		{
-			Node node;
-			node.id = m_nodes.size();
-			node.data = data;
-			node.next = 0; // there is no next yet!
-			NodeIterator it(m_nodes, node.id);
-			m_nodes.push_back(node);
+		NodeIterator addNode(const Data & data);
 
-			if (!m_outline.empty())
-			{
-				NodeIterator last = back();
-				it.node().last = last.id;
-				last.node().next = node.id; // asign ourselves as our last's next
-			}
+		void addOutline(const NodeIterator & it);
 
-			addOutline(it); // add to outline
-			return it;
-		}
+		bool popOutline(unsigned int n = 1);
 
-		void addOutline(const NodeIterator & it)
-		{
-			m_outline.push_back(it);
-		}
+		void addEdge(ofIndexType from, ofIndexType to, float distance);
 
-		bool popOutline(unsigned int n = 1)
-		{
-			if (m_outline.size() < n)
-			{
-				return false;
-			}
+		void addJoint(ofIndexType from, ofIndexType to);
 
-			for (unsigned int i = 0; i < n; i++)
-			{
-				m_outline.pop_front();
-			}
-			return true;
-		}
-
-		void addEdge(ofIndexType from, ofIndexType to, float distance)
-		{
-			Edge edge;
-			edge.from = from;
-			edge.to = to;
-			edge.distance = distance;
-			m_edges.push_back(edge);
-		}
-
-		void addJoint(ofIndexType from, ofIndexType to)
-		{
-			Joint joint;
-			joint.from = from;
-			joint.to = to;
-			m_joints.push_back(joint);
-		}
-
-		void addFace(ofIndexType a, ofIndexType b, ofIndexType c)
-		{
-			if (a == b || a == c || b == c) return; // check triangles are valid
-			Face face;
-			face.ids[0] = a;
-			face.ids[1] = b;
-			face.ids[2] = c;
-			m_faces.push_back(face);
-		}
+		void addFace(ofIndexType a, ofIndexType b, ofIndexType c);
 
 		NodeIterator at(ofIndexType id)
 		{
@@ -197,12 +143,12 @@ namespace ami
 
 		NodeIterator front()
 		{
-			return NodeIterator(m_nodes, m_outline.front().id);
+			return NodeIterator(m_nodes, m_outline.front());
 		}
 
 		NodeIterator back()
 		{
-			return NodeIterator(m_nodes, m_outline.back().id);
+			return NodeIterator(m_nodes, m_outline.back());
 		}
 
 		NodeIterator get(ofIndexType id)
@@ -215,6 +161,6 @@ namespace ami
 		std::vector<Edge> m_edges;
 		std::vector<Joint> m_joints;
 		std::vector<Face> m_faces;
-		std::deque<NodeIterator> m_outline;
+		std::deque<ofIndexType> m_outline;
 	};
 }

@@ -23,6 +23,7 @@ namespace ami
 			bool id = false;
 			bool forces = false;
 			bool outline = false;
+			bool anchor = false;
 		};
 
 		PatternMesh() {};
@@ -45,7 +46,6 @@ namespace ami
 		void solveConstraints();
 		void computeForces();
 		void verletUpdate(float deltaTime);
-		void updateCenter();
 		void updateNormals();
 
 		ofMesh m_mesh;
